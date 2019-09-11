@@ -3,16 +3,16 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\modules\admin\models\jobs;
+use app\modules\admin\models\Employee;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * JobController implements the CRUD actions for jobs model.
+ * EmployeeController implements the CRUD actions for Employee model.
  */
-class JobController extends Controller
+class EmployeeController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,44 +30,46 @@ class JobController extends Controller
     }
 
     /**
-     * Lists all jobs models.
+     * Lists all Employee models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => jobs::find(),
-        ]);
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+        $employees = Employee::find()->with('companies', 'departments')
+                                     //->where(['companies_id' => $id])
+                                     ->asArray()
+                                     ->all();
+
+        return $this->render('index', compact('employees'));
     }
 
     /**
-     * Displays a single jobs model.
+     * Displays a single Employee model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $employee = Employee::find()->with('companies', 'departments')
+            ->where(['id' => $id])
+            ->asArray()
+            ->one();
+        return $this->render('view', compact('employee'));
     }
 
     /**
-     * Creates a new jobs model.
+     * Creates a new Employee model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new jobs();
+        $model = new Employee();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->jobid]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -76,7 +78,7 @@ class JobController extends Controller
     }
 
     /**
-     * Updates an existing jobs model.
+     * Updates an existing Employee model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -87,7 +89,7 @@ class JobController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->jobid]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -96,7 +98,7 @@ class JobController extends Controller
     }
 
     /**
-     * Deletes an existing jobs model.
+     * Deletes an existing Employee model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +112,15 @@ class JobController extends Controller
     }
 
     /**
-     * Finds the jobs model based on its primary key value.
+     * Finds the Employee model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return jobs the loaded model
+     * @return Employee the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = jobs::findOne($id)) !== null) {
+        if (($model = Employee::findOne($id)) !== null) {
             return $model;
         }
 

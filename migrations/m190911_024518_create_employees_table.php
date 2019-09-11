@@ -19,32 +19,14 @@ class m190911_024518_create_employees_table extends Migration
     {
         $this->createTable('{{%employees}}', [
             'id' => $this->primaryKey(),
-            'skills_id' => $this->integer()->notNull(),
+            'companies_id' => $this->integer()->notNull(),
             'departments_id' => $this->integer()->notNull(),
-            'salary_id' => $this->integer()->notNull(),
             'first_name' => $this->string()->notNull(),
             'last_name' => $this->string()->notNull(),
             'email' => $this->string(),
             'address' => $this->string()->notNull(),
             'phone_number' => $this->string()->notNull(),
         ]);
-
-        // creates index for column `skills_id`
-        $this->createIndex(
-            '{{%idx-employees-skills_id}}',
-            '{{%employees}}',
-            'skills_id'
-        );
-
-        // add foreign key for table `{{%skills}}`
-        $this->addForeignKey(
-            '{{%fk-employees-skills_id}}',
-            '{{%employees}}',
-            'skills_id',
-            '{{%skills}}',
-            'id',
-            'CASCADE'
-        );
 
         // creates index for column `departments_id`
         $this->createIndex(
@@ -63,19 +45,19 @@ class m190911_024518_create_employees_table extends Migration
             'CASCADE'
         );
 
-        // creates index for column `salary_id`
+        // creates index for column `companies_id`
         $this->createIndex(
-            '{{%idx-employees-salary_id}}',
+            '{{%idx-employees-companies_id}}',
             '{{%employees}}',
-            'salary_id'
+            'companies_id'
         );
 
-        // add foreign key for table `{{%salary}}`
+        // add foreign key for table `{{%companies}}`
         $this->addForeignKey(
-            '{{%fk-employees-salary_id}}',
+            '{{%fk-employees-companies_id}}',
             '{{%employees}}',
-            'salary_id',
-            '{{%salary}}',
+            'companies_id',
+            '{{%companies}}',
             'id',
             'CASCADE'
         );
@@ -86,18 +68,6 @@ class m190911_024518_create_employees_table extends Migration
      */
     public function safeDown()
     {
-        // drops foreign key for table `{{%skills}}`
-        $this->dropForeignKey(
-            '{{%fk-employees-skills_id}}',
-            '{{%employees}}'
-        );
-
-        // drops index for column `skills_id`
-        $this->dropIndex(
-            '{{%idx-employees-skills_id}}',
-            '{{%employees}}'
-        );
-
         // drops foreign key for table `{{%departments}}`
         $this->dropForeignKey(
             '{{%fk-employees-departments_id}}',
@@ -110,15 +80,15 @@ class m190911_024518_create_employees_table extends Migration
             '{{%employees}}'
         );
 
-        // drops foreign key for table `{{%salary}}`
+        // drops foreign key for table `{{%companies}}`
         $this->dropForeignKey(
-            '{{%fk-employees-salary_id}}',
+            '{{%fk-employees-companies_id}}',
             '{{%employees}}'
         );
 
-        // drops index for column `salary_id`
+        // drops index for column `companies_id`
         $this->dropIndex(
-            '{{%idx-employees-salary_id}}',
+            '{{%idx-employees-companies_id}}',
             '{{%employees}}'
         );
 

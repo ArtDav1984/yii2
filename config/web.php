@@ -12,7 +12,7 @@ $config = [
         'admin' => [
             'class' => 'app\modules\admin\Module',
             'layout' => 'admin',
-            'defaultRoute' => 'job/index'
+            'defaultRoute' => 'employee/index'
         ]
     ],
     'aliases' => [

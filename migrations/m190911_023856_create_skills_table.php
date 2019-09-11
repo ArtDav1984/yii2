@@ -17,26 +17,8 @@ class m190911_023856_create_skills_table extends Migration
     {
         $this->createTable('{{%skills}}', [
             'id' => $this->primaryKey(),
-            'departments_id' => $this->integer()->notNull(),
             'name' => $this->string(),
         ]);
-
-        // creates index for column `departments_id`
-        $this->createIndex(
-            '{{%idx-skills-departments_id}}',
-            '{{%skills}}',
-            'departments_id'
-        );
-
-        // add foreign key for table `{{%departments}}`
-        $this->addForeignKey(
-            '{{%fk-skills-departments_id}}',
-            '{{%skills}}',
-            'departments_id',
-            '{{%departments}}',
-            'id',
-            'CASCADE'
-        );
     }
 
     /**
@@ -44,18 +26,6 @@ class m190911_023856_create_skills_table extends Migration
      */
     public function safeDown()
     {
-        // drops foreign key for table `{{%departments}}`
-        $this->dropForeignKey(
-            '{{%fk-skills-departments_id}}',
-            '{{%skills}}'
-        );
-
-        // drops index for column `departments_id`
-        $this->dropIndex(
-            '{{%idx-skills-departments_id}}',
-            '{{%skills}}'
-        );
-
         $this->dropTable('{{%skills}}');
     }
 }
