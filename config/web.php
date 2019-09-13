@@ -7,13 +7,12 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'language' => 'en-EN',
     'modules' => [
-        'admin' => [
-            'class' => 'app\modules\admin\Module',
-            'layout' => 'admin',
-            'defaultRoute' => 'employee/index'
-        ]
+	    'admin' => [
+		    'class' => 'app\modules\admin\Module',
+		    'layout' => 'admin',
+		    'defaultRoute' => 'site/index'
+	    ]
     ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -22,8 +21,8 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'yoTVepQC__F4Kazdx-v12ldYrnQIrbq6',
-            'baseUrl'=> ''
+            'cookieValidationKey' => 'tVL_bqj1WId9FuL2frku4MLy4zXphB6W',
+            'baseUrl'=> '',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -52,13 +51,14 @@ $config = [
             ],
         ],
         'db' => $db,
-
+        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
+        
     ],
     'params' => $params,
 ];

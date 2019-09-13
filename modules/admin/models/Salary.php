@@ -8,8 +8,11 @@ use Yii;
  * This is the model class for table "salary".
  *
  * @property int $id
+ * @property int $employee_id
  * @property string $date
  * @property string $salary
+ *
+ * @property Employees $employee
  */
 class Salary extends \yii\db\ActiveRecord
 {
@@ -27,8 +30,11 @@ class Salary extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['employee_id', 'date', 'salary'], 'required'],
+            [['employee_id'], 'integer'],
             [['date'], 'safe'],
             [['salary'], 'string', 'max' => 255],
+            [['employee_id'], 'exist', 'skipOnError' => true, 'targetClass' => Employee::className(), 'targetAttribute' => ['employee_id' => 'id']],
         ];
     }
 
@@ -39,8 +45,17 @@ class Salary extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'employee_id' => 'Employee ID',
             'date' => 'Date',
             'salary' => 'Salary',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEmployee()
+    {
+        return $this->hasOne(Employee::className(), ['id' => 'employee_id']);
     }
 }

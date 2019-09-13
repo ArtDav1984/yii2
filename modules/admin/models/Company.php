@@ -28,7 +28,8 @@ class Company extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'string'],
+            [['name'], 'required'],
+            [['name'], 'string', 'max' => 255],
         ];
     }
 

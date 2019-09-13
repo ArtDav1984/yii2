@@ -12,12 +12,16 @@ use Yii;
  * @property int $departments_id
  * @property string $first_name
  * @property string $last_name
- * @property string $email
+ * @property int $age
+ * @property string $gender
+ * @property string $city
  * @property string $address
- * @property string $phone_number
+ * @property int $phone_number
+ * @property string $email
  *
  * @property Companies $companies
  * @property Departments $departments
+ * @property Salary[] $salaries
  * @property SkillsEmployees[] $skillsEmployees
  */
 class Employee extends \yii\db\ActiveRecord
@@ -36,9 +40,9 @@ class Employee extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['companies_id', 'departments_id', 'first_name', 'last_name', 'address', 'phone_number'], 'required'],
-            [['companies_id', 'departments_id'], 'integer'],
-            [['first_name', 'last_name', 'email', 'address', 'phone_number'], 'string', 'max' => 255],
+            [['companies_id', 'departments_id', 'first_name', 'last_name', 'age', 'gender', 'city', 'address', 'phone_number', 'email'], 'required'],
+            [['companies_id', 'departments_id', 'age', 'phone_number'], 'integer'],
+            [['first_name', 'last_name', 'gender', 'city', 'address', 'email'], 'string', 'max' => 255],
             [['companies_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['companies_id' => 'id']],
             [['departments_id'], 'exist', 'skipOnError' => true, 'targetClass' => Department::className(), 'targetAttribute' => ['departments_id' => 'id']],
         ];
@@ -55,9 +59,12 @@ class Employee extends \yii\db\ActiveRecord
             'departments_id' => 'Departments ID',
             'first_name' => 'First Name',
             'last_name' => 'Last Name',
-            'email' => 'Email',
+            'age' => 'Age',
+            'gender' => 'Gender',
+            'city' => 'City',
             'address' => 'Address',
             'phone_number' => 'Phone Number',
+            'email' => 'Email',
         ];
     }
 
@@ -75,6 +82,14 @@ class Employee extends \yii\db\ActiveRecord
     public function getDepartments()
     {
         return $this->hasOne(Department::className(), ['id' => 'departments_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSalaries()
+    {
+        return $this->hasMany(Salary::className(), ['employee_id' => 'id']);
     }
 
     /**

@@ -9,61 +9,22 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-/**
- * EmployeeController implements the CRUD actions for Employee model.
- */
 class EmployeeController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
+    public function actionIndex($id)
     {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
+	    $employees = $this->findModel()->where(['companies_id' => $id])->all();
+	    
+	    return $this->render('index', compact('employees'));
     }
 
-    /**
-     * Lists all Employee models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-
-        $employees = Employee::find()->with('companies', 'departments')
-                                     //->where(['companies_id' => $id])
-                                     ->asArray()
-                                     ->all();
-
-        return $this->render('index', compact('employees'));
-    }
-
-    /**
-     * Displays a single Employee model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionView($id)
     {
-        $employee = Employee::find()->with('companies', 'departments')
-            ->where(['id' => $id])
-            ->asArray()
-            ->one();
-        return $this->render('view', compact('employee'));
+	    $employee = $this->findModel()->where(['id' => $id])->one();;
+	    
+	    return $this->render('view', compact('employee'));
     }
 
-    /**
-     * Creates a new Employee model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
     public function actionCreate()
     {
         $model = new Employee();
@@ -72,58 +33,32 @@ class EmployeeController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        return $this->render('create', compact('model'));
     }
 
-    /**
-     * Updates an existing Employee model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel()->where(['id' => $id])->one();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        return $this->render('update', compact('model'));
     }
 
-    /**
-     * Deletes an existing Employee model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = Employee::findOne($id);
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['index', 'id' => $model->companies_id]);
     }
 
-    /**
-     * Finds the Employee model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Employee the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
+    protected function findModel()
     {
-        if (($model = Employee::findOne($id)) !== null) {
-            return $model;
-        }
+        $employee = Employee::find()->with('companies', 'departments', 'skillsEmployees.skills');
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        return $employee;
     }
 }
