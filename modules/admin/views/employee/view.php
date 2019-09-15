@@ -1,16 +1,22 @@
 <?php
-	use yii\helpers\Html;
-	use yii\widgets\DetailView;
-	/* @var $this yii\web\View */
-	/* @var $model app\modules\admin\models\Employee */
-	$this->title = $employee->id;
-	$this->params['breadcrumbs'][] = ['label' => 'Employees', 'url' => ['index']];
-	$this->params['breadcrumbs'][] = $this->title;
-	\yii\web\YiiAsset::register($this);
+
+use yii\helpers\Html;
+
+/* @var $this yii\web\View */
+
+$this->title = 'View';
+\yii\web\YiiAsset::register($this);
 ?>
+<div class="breadcrumbs">
+    <ol class="breadcrumb">
+        <li><a href="/admin">Dashboard</a></li>
+        <li><a href="/admin/employee/index">Employees</a></li>
+        <li class="active"><?= $this->title; ?></li>
+    </ol>
+</div>
 <div class="employee-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($employee->id) ?></h1>
 
     <p>
 		<?= Html::a('Update', ['update', 'id' => $employee->id], ['class' => 'btn btn-primary']) ?>
@@ -39,16 +45,16 @@
         <tr>
             <td><b>Skill</b></td>
             <td>
-	            <?php $skillsEmployees = $employee->skillsEmployees ?>
-	            <?php
-		            $skills = '';
-		            foreach ($skillsEmployees as $skillsEmployee):
-			            ?>
-			            <?php  $skills.=$skillsEmployee['skills']['name'].', ' ?>
-		            <?php endforeach;
-		            $skills = rtrim($skills,', ');
-		            echo $skills;
-	            ?>
+				<?php $skillsEmployees = $employee->skillsEmployees ?>
+				<?php
+					$skills = '';
+					foreach ($skillsEmployees as $skillsEmployee):
+						?>
+						<?php  $skills.=$skillsEmployee['skills']['name'].', ' ?>
+					<?php endforeach;
+					$skills = rtrim($skills,', ');
+					echo $skills;
+				?>
             </td>
         </tr>
         <tr>

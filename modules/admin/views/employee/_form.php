@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\jui\DatePicker;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Employee */
@@ -9,10 +11,11 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="employee-form">
-
+    
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'companies_id')->textInput() ?>
+    <?= $form->field($model, 'companies_id')
+             ->dropDownList($companiesList, ['id' => $model->companies['id']]); ?>
 
     <?= $form->field($model, 'departments_id')->textInput() ?>
 
@@ -20,7 +23,18 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'last_name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'age')->textInput() ?>
+    <?php $birthday = !is_null($model->birthday) ? date('M j, Y', strtotime($model->birthday)) : ''; ?>
+
+    <?= $form->field($model, 'age')
+    ->widget(DatePicker::className(), [
+        'language' => 'en',
+        'clientOptions' => [
+            'changeMonth' => true,
+            'changeYear' => true,
+            'dateFormat' => 'yyyy/MM/dd',
+            'yearRange' => '1950:2020',
+        ]
+    ])->textInput(['class' => 'form-control', 'readonly' => true, 'value' => $birthday]) ?>
 
     <?= $form->field($model, 'gender')->textInput(['maxlength' => true]) ?>
 

@@ -11,7 +11,7 @@ use Yii;
  * @property int $skills_id
  * @property int $employees_id
  *
- * @property Employees $employees
+ * @property Employee $employees
  * @property Skills $skills
  */
 class SkillEmployee extends \yii\db\ActiveRecord
@@ -45,7 +45,7 @@ class SkillEmployee extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'skills_id' => 'Skills ID',
-            'employees_id' => 'Employees ID',
+            'employees_id' => 'Employee ID',
         ];
     }
 

@@ -1,12 +1,11 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+
 
 /* @var $this yii\web\View */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Employees';
+$this->title = 'Employee';
 ?>
 <div class="breadcrumbs">
     <ol class="breadcrumb">
@@ -19,7 +18,7 @@ $this->title = 'Employees';
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Employee', ['create'], ['class' => 'btn btn-success']) ?>
+		<?= Html::a('Create Employee', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
 
@@ -40,17 +39,17 @@ $this->title = 'Employees';
                 <td><?php echo $employee->companies['name']; ?></td>
                 <td><?php echo $employee->departments['name']; ?></td>
                 <td>
-                <?php $skillsEmployees = $employee->skillsEmployees; ?>
-                <?php
-	                $skills = '';
-                    foreach ($skillsEmployees as $skillsEmployee):
-                ?>
-                <?php  $skills.=$skillsEmployee['skills']['name'].', ' ?>
-                <?php endforeach;
-                    $skills = rtrim($skills,', ');
-                    echo $skills;
-                ?>
-                
+					<?php $skillsEmployees = $employee->skillsEmployees; ?>
+					<?php
+						$skills = '';
+						foreach ($skillsEmployees as $skillsEmployee):
+							?>
+							<?php  $skills.=$skillsEmployee['skills']['name'].', ' ?>
+						<?php endforeach;
+						$skills = rtrim($skills,', ');
+						echo $skills;
+					?>
+
                 </td>
                 <td><?php echo $employee->first_name; ?></td>
                 <td><?php echo $employee->last_name; ?></td>

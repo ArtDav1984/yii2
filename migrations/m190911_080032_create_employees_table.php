@@ -23,6 +23,7 @@ class m190911_080032_create_employees_table extends Migration
             'departments_id' => $this->integer()->notNull(),
             'first_name' => $this->string()->notNull(),
             'last_name' => $this->string()->notNull(),
+            'birthday' => $this->date()->notNull(),
             'age' => $this->integer()->notNull(),
             'gender' => $this->string()->notNull(),
             'city' => $this->string()->notNull(),

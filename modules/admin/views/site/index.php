@@ -2,25 +2,61 @@
 	$this->title = 'Admin';
 ?>
 
-<nav id="sidebar">
-	<div class="sidebar-header">
-		<h3>Admin Sidebar</h3>
-	</div>
-	
-	<ul class="list-unstyled components">
-		<p>Companies</p>
-		<?php foreach ($companies as $company) : ?>
-		<li class="active">
-			<a href="#<?= $company['id']; ?>" data-toggle="collapse" aria-expanded="false"><?= $company['name']; ?></a>
-			<ul class="collapse list-unstyled" id="<?= $company['id']; ?>">
-				<li><a href='/admin/employee/index/?id=<?= $company['id'] ?>'>To Manage Employees</a></li>
-                <li><a href='/admin/skill/index/?id=<?= $company['id'] ?>'>To Manage Skills</a></li>
-                <li><a href='/admin/salary/index/?id=<?= $company['id'] ?>'>To Manage Salary</a></li>
-			</ul>
-		</li>
-		<?php endforeach; ?>
-	</ul>
-</nav>
+<div class="breadcrumbs">
+    <ol class="breadcrumb">
+        <li class="active">Dashboard</li>
+    </ol>
+</div>
+
+<div class="row">
+    <h2>Companies</h2>
+    <?php foreach ($companies as $company) : ?>
+    <div class="col-md-3">
+        <div class="square-service-block">
+                <div class="ssb-icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
+                <h2 class="ssb-title"><?= $company['name']; ?></h2>
+        </div>
+    </div>
+    <?php endforeach; ?>
+</div>
+<div class="row">
+    <h2>Quantity</h2>
+    <div class="col-md-3">
+        <div class="square-service-block">
+            <a href="#">
+                <div class="ssb-icon"> <?= $employeesCount; ?> </div>
+                <h2 class="ssb-title">Employees</h2>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="square-service-block">
+            <a href="#">
+                <div class="ssb-icon"><?= $departmentsCount; ?></div>
+                <h2 class="ssb-title">Departments</h2>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="square-service-block">
+            <a href="#">
+                <div class="ssb-icon"><?= $skillsCount; ?></div>
+                <h2 class="ssb-title">Skills</h2>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="square-service-block">
+            <a href="#">
+                <div class="ssb-icon"><?= $citiesCount; ?></div>
+                <h2 class="ssb-title">Cities</h2>
+            </a>
+        </div>
+    </div>
+</div>
 
 
 

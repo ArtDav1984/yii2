@@ -12,7 +12,8 @@ use Yii;
  * @property int $departments_id
  * @property string $first_name
  * @property string $last_name
- * @property int $age
+ * @property string $birthday
+ * @property string $age
  * @property string $gender
  * @property string $city
  * @property string $address
@@ -40,8 +41,10 @@ class Employee extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['companies_id', 'departments_id', 'first_name', 'last_name', 'age', 'gender', 'city', 'address', 'phone_number', 'email'], 'required'],
-            [['companies_id', 'departments_id', 'age', 'phone_number'], 'integer'],
+            [['companies_id', 'departments_id', 'first_name', 'last_name', 'age', 'gender', 'city', 'address', 'phone_number', 'email'], 'required',
+                'message' => 'This field is required'],
+            [['companies_id', 'departments_id', 'phone_number'], 'integer'],
+            [['age'], 'safe'],
             [['first_name', 'last_name', 'gender', 'city', 'address', 'email'], 'string', 'max' => 255],
             [['companies_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['companies_id' => 'id']],
             [['departments_id'], 'exist', 'skipOnError' => true, 'targetClass' => Department::className(), 'targetAttribute' => ['departments_id' => 'id']],
@@ -55,11 +58,11 @@ class Employee extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'companies_id' => 'Companies ID',
-            'departments_id' => 'Departments ID',
+            'companies_id' => 'Companies',
+            'departments_id' => 'Departments',
             'first_name' => 'First Name',
             'last_name' => 'Last Name',
-            'age' => 'Age',
+            'age' => 'Birthday',
             'gender' => 'Gender',
             'city' => 'City',
             'address' => 'Address',

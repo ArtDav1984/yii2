@@ -12,7 +12,7 @@ use Yii;
  * @property string $date
  * @property string $salary
  *
- * @property Employees $employee
+ * @property Employee $employee
  */
 class Salary extends \yii\db\ActiveRecord
 {
