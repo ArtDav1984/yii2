@@ -1,11 +1,12 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\LinkPager;
 
 
 /* @var $this yii\web\View */
 
-$this->title = 'Employee';
+$this->title = 'Employees';
 ?>
 <div class="breadcrumbs">
     <ol class="breadcrumb">
@@ -26,16 +27,17 @@ $this->title = 'Employee';
 
     <table class="table-bordered table-striped table">
         <tr>
+            <th>City</th>
             <th>Company</th>
             <th>Department</th>
             <th>Skill</th>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Name</th>
             <th>Age</th>
             <th colspan="3">Operations</th>
         </tr>
 		<?php foreach ($employees as $employee): ?>
             <tr>
+                <td><?php echo $employee->city; ?></td>
                 <td><?php echo $employee->companies['name']; ?></td>
                 <td><?php echo $employee->departments['name']; ?></td>
                 <td>
@@ -51,8 +53,7 @@ $this->title = 'Employee';
 					?>
 
                 </td>
-                <td><?php echo $employee->first_name; ?></td>
-                <td><?php echo $employee->last_name; ?></td>
+                <td><?php echo $employee->first_name.' '.$employee->last_name; ?></td>
                 <td><?php echo $employee->age; ?></td>
                 <td><?= Html::a('<i class="fa fa-eye">', ['view', 'id' => $employee['id']]) ?></td>
                 <td> <?= Html::a('<i class="fa fa-pencil-square-o">', ['update', 'id' => $employee['id']]) ?></td>
@@ -64,6 +65,9 @@ $this->title = 'Employee';
             </tr>
 		<?php endforeach; ?>
     </table>
-
-
+    
+    <?php echo LinkPager::widget([
+	    'pagination' => $pagination,
+    ]); ?>
+    
 </div>

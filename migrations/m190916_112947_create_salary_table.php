@@ -6,9 +6,9 @@ use yii\db\Migration;
  * Handles the creation of table `{{%salary}}`.
  * Has foreign keys to the tables:
  *
- * - `{{%employee}}`
+ * - `{{%employees}}`
  */
-class m190912_071252_create_salary_table extends Migration
+class m190916_112947_create_salary_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -17,23 +17,23 @@ class m190912_071252_create_salary_table extends Migration
     {
         $this->createTable('{{%salary}}', [
             'id' => $this->primaryKey(),
-            'employee_id' => $this->integer()->notNull(),
-            'date' => $this->date()->notNull(),
-            'salary' => $this->string()->notNull(),
+            'employees_id' => $this->integer()->notNull(),
+            'create_at' => $this->date()->notNull(),
+            'salary' => $this->integer()->notNull(),
         ]);
 
-        // creates index for column `employee_id`
+        // creates index for column `employees_id`
         $this->createIndex(
-            '{{%idx-salary-employee_id}}',
+            '{{%idx-salary-employees_id}}',
             '{{%salary}}',
-            'employee_id'
+            'employees_id'
         );
 
         // add foreign key for table `{{%employees}}`
         $this->addForeignKey(
-            '{{%fk-salary-employee_id}}',
+            '{{%fk-salary-employees_id}}',
             '{{%salary}}',
-            'employee_id',
+            'employees_id',
             '{{%employees}}',
             'id',
             'CASCADE'
@@ -45,15 +45,15 @@ class m190912_071252_create_salary_table extends Migration
      */
     public function safeDown()
     {
-        // drops foreign key for table `{{%employee}}`
+        // drops foreign key for table `{{%employees}}`
         $this->dropForeignKey(
-            '{{%fk-salary-employee_id}}',
+            '{{%fk-salary-employees_id}}',
             '{{%salary}}'
         );
 
-        // drops index for column `employee_id`
+        // drops index for column `employees_id`
         $this->dropIndex(
-            '{{%idx-salary-employee_id}}',
+            '{{%idx-salary-employees_id}}',
             '{{%salary}}'
         );
 

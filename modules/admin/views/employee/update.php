@@ -16,8 +16,8 @@ $this->title = 'Update Employee';
 </div>
 <div class="employee-update">
 
-    <h1><?= Html::encode($this->title.': ' . $model->id) ?></h1>
-
-    <?= $this->render('_form', compact('model', 'companiesList')) ?>
+    <h1><?= Html::encode($this->title.': ' . $employee->id) ?></h1>
+	
+	<?= $this->render('_form', compact('employee', 'companiesList', 'departmentsList')) ?>
 
 </div>

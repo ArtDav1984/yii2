@@ -4,8 +4,8 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Employee */
-
-$this->title = 'Create Employee';
+	
+	$this->title = 'Create Employee';
 ?>
 <div class="breadcrumbs">
     <ol class="breadcrumb">
@@ -17,7 +17,7 @@ $this->title = 'Create Employee';
 <div class="employee-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', compact('model', 'companiesList')) ?>
+	
+	<?= $this->render('_form', compact('employee', 'companiesList', 'departmentsList')) ?>
 
 </div>

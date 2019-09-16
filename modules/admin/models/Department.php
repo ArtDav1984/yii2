@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property string $name
  *
- * @property Employee[] $employees
+ * @property Employees[] $employees
  */
 class Department extends \yii\db\ActiveRecord
 {

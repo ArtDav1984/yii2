@@ -8,9 +8,9 @@ use yii\db\Migration;
  *
  * - `{{%companies}}`
  * - `{{%departments}}`
- * - `{{%salary}}`
+ * - `{{%cities}}`
  */
-class m190911_080032_create_employees_table extends Migration
+class m190916_112346_create_employees_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -95,6 +95,7 @@ class m190911_080032_create_employees_table extends Migration
             '{{%idx-employees-departments_id}}',
             '{{%employees}}'
         );
+
         $this->dropTable('{{%employees}}');
     }
 }

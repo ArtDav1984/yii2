@@ -6,6 +6,7 @@ use yii\helpers\Html;
 
 $this->title = 'View';
 \yii\web\YiiAsset::register($this);
+
 ?>
 <div class="breadcrumbs">
     <ol class="breadcrumb">
@@ -16,7 +17,7 @@ $this->title = 'View';
 </div>
 <div class="employee-view">
 
-    <h1><?= Html::encode($employee->id) ?></h1>
+    <h1><?= Html::encode($employee->first_name.' '.$employee->last_name) ?></h1>
 
     <p>
 		<?= Html::a('Update', ['update', 'id' => $employee->id], ['class' => 'btn btn-primary']) ?>
@@ -66,6 +67,10 @@ $this->title = 'View';
             <td><?php echo $employee->last_name; ?></td>
         </tr>
         <tr>
+            <td><b>Birthday</b></td>
+            <td><?php echo date('M j, Y', strtotime($employee->birthday)); ?></td>
+        </tr>
+        <tr>
             <td><b>Age</b></td>
             <td><?php echo $employee->age; ?></td>
         </tr>
@@ -88,6 +93,10 @@ $this->title = 'View';
         <tr>
             <td><b>Email</b></td>
             <td><?php echo $employee->email; ?></td>
+        </tr>
+        <tr>
+            <td><b>Salary</b></td>
+            <td><?php echo $employee->salaries['salary']; ?> AMD</td>
         </tr>
     </table>
 

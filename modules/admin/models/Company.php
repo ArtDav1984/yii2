@@ -9,8 +9,9 @@ use Yii;
  *
  * @property int $id
  * @property string $name
+ * @property string $img_path
  *
- * @property Employee[] $employees
+ * @property Employees[] $employees
  */
 class Company extends \yii\db\ActiveRecord
 {
@@ -28,8 +29,8 @@ class Company extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
-            [['name'], 'string', 'max' => 255],
+            [['name', 'img_path'], 'required'],
+            [['name', 'img_path'], 'string', 'max' => 255],
         ];
     }
 
@@ -41,6 +42,7 @@ class Company extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
+            'img_path' => 'Img Path',
         ];
     }
 

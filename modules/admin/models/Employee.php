@@ -10,16 +10,17 @@ use Yii;
  * @property int $id
  * @property int $companies_id
  * @property int $departments_id
+ * @property int $cities_id
  * @property string $first_name
  * @property string $last_name
  * @property string $birthday
- * @property string $age
+ * @property int $age
  * @property string $gender
- * @property string $city
  * @property string $address
  * @property int $phone_number
  * @property string $email
  *
+ * @property Cities $cities
  * @property Companies $companies
  * @property Departments $departments
  * @property Salary[] $salaries
@@ -41,10 +42,9 @@ class Employee extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['companies_id', 'departments_id', 'first_name', 'last_name', 'age', 'gender', 'city', 'address', 'phone_number', 'email'], 'required',
-                'message' => 'This field is required'],
-            [['companies_id', 'departments_id', 'phone_number'], 'integer'],
-            [['age'], 'safe'],
+            [['companies_id', 'departments_id', 'city', 'first_name', 'last_name', 'birthday', 'age', 'gender', 'address', 'phone_number', 'email'], 'required'],
+            [['companies_id', 'departments_id', 'age', 'phone_number'], 'integer'],
+            [['birthday'], 'safe'],
             [['first_name', 'last_name', 'gender', 'city', 'address', 'email'], 'string', 'max' => 255],
             [['companies_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['companies_id' => 'id']],
             [['departments_id'], 'exist', 'skipOnError' => true, 'targetClass' => Department::className(), 'targetAttribute' => ['departments_id' => 'id']],
@@ -60,11 +60,11 @@ class Employee extends \yii\db\ActiveRecord
             'id' => 'ID',
             'companies_id' => 'Companies',
             'departments_id' => 'Departments',
+            'city' => 'City',
             'first_name' => 'First Name',
             'last_name' => 'Last Name',
-            'age' => 'Birthday',
+            'birthday' => 'Birthday',
             'gender' => 'Gender',
-            'city' => 'City',
             'address' => 'Address',
             'phone_number' => 'Phone Number',
             'email' => 'Email',
@@ -92,7 +92,7 @@ class Employee extends \yii\db\ActiveRecord
      */
     public function getSalaries()
     {
-        return $this->hasMany(Salary::className(), ['employee_id' => 'id']);
+        return $this->hasOne(Salary::className(), ['employees_id' => 'id']);
     }
 
     /**

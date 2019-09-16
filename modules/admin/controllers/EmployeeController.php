@@ -5,6 +5,9 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\modules\admin\models\Employee;
 use app\modules\admin\models\Company;
+use app\modules\admin\models\Department;
+use app\modules\admin\models\City;
+use yii\data\Pagination;
 use yii\web\Controller;
 
 /**
@@ -14,52 +17,66 @@ class EmployeeController extends Controller
 {
 	public function actionIndex()
 	{
-		$employees = $this->findModel()->all();
+		$query = Employee::find()->with('companies', 'departments', 'skillsEmployees.skills');
 		
-		return $this->render('index', compact('employees'));
+		$count = $query->count();
+		
+		$pagination = new Pagination(['totalCount' => $count]);
+		$pagination->defaultPageSize = 10;
+		
+		$employees = $query->offset($pagination->offset)
+		                   ->limit($pagination->limit)
+		                   ->all();
+		
+		return $this->render('index', compact('employees', 'pagination'));
 	}
 	
 	public function actionView($id)
 	{
-		$employee = $this->findModel()->where(['id' => $id])->one();;
+		$employee = Employee::find()->with('companies', 'departments', 'salaries', 'skillsEmployees.skills')
+		                            ->where(['id' => $id])->one();;
 		
 		return $this->render('view', compact('employee'));
 	}
 	
 	public function actionCreate()
 	{
-		$model = new Employee();
+		$employee = new Employee();
 		$companies = Company::find()->asArray()->all();
+		$departments = Department::find()->asArray()->all();
 		$companiesList = $this->createList($companies, 'id', 'name');
+		$departmentsList = $this->createList($departments, 'id', 'name');
 		
-		if ($model->load(Yii::$app->request->post())) {
-            $birthday = Yii::$app->request->post('Employee')['age'];
-            $model->age = $this->calculateAge($birthday);
-            $model->birthday = date_format(date_create("$birthday"), "Y-m-d");
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+		if ($employee->load(Yii::$app->request->post())) {
+			$birthday = Yii::$app->request->post('Employee')['birthday'];
+			$employee->age = $this->calculateAge($birthday);
+			$employee->birthday = date_format(date_create("$birthday"), "Y-m-d");
+			if ($employee->save()) {
+				return $this->redirect(['view', 'id' => $employee->id]);
+			}
 		}
 		
-		return $this->render('create', compact('model', 'companiesList'));
+		return $this->render('create', compact('employee', 'companiesList', 'departmentsList'));
 	}
 	
 	public function actionUpdate($id)
 	{
-        $model = $this->findModel()->where(['id' => $id])->one();
-        $companies = Company::find()->asArray()->all();
+		$employee = Employee::find()->with('companies', 'departments')->where(['id' => $id])->one();
+		$companies = Company::find()->asArray()->all();
+		$departments = Department::find()->asArray()->all();
 		$companiesList = $this->createList($companies, 'id', 'name');
-
-        if ($model->load(Yii::$app->request->post())) {
-            $birthday = Yii::$app->request->post('Employee')['age'];
-            $model->age = $this->calculateAge($birthday);
-            $model->birthday = date_format(date_create("$birthday"), "Y-m-d");
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        }
-
-		return $this->render('update', compact('model', 'companiesList'));
+		$departmentsList = $this->createList($departments, 'id', 'name');
+		
+		if ($employee->load(Yii::$app->request->post())) {
+			$birthday = Yii::$app->request->post('Employee')['birthday'];
+			$employee->age = $this->calculateAge($birthday);
+			$employee->birthday = date_format(date_create("$birthday"), "Y-m-d");
+			if ($employee->save()) {
+				return $this->redirect(['view', 'id' => $employee->id]);
+			}
+		}
+		
+		return $this->render('update', compact('employee', 'companiesList', 'departmentsList'));
 	}
 	
 	public function actionDelete($id)
@@ -69,34 +86,24 @@ class EmployeeController extends Controller
 		return $this->redirect(['index']);
 	}
 	
-	protected function findModel()
-	{
-		$model = Employee::find()->with('companies', 'departments', 'skillsEmployees.skills');
-		
-		return $model;
-	}
-
 	protected function createList($model, $id, $name)
-    {
-        $list = [];
-        foreach ($model as $item) {
-            $list[$item[$id]] = $item[$name];
-        }
-
-        return $list;
-    }
-
-    protected function calculateAge($birthdayDate)
-    {
-        $dob = strtotime(str_replace("/","-",$birthdayDate));
-        $date = time();
-        $age = 0;
-
-        while($date > $dob = strtotime('+1 year', $dob))
-        {
-            ++$age;
-        }
-
-        return $age;
-    }
+	{
+		$list = [];
+		foreach ($model as $item) {
+			$list[$item[$id]] = $item[$name];
+		}
+		return $list;
+	}
+	
+	protected function calculateAge($birthdayDate)
+	{
+		$dob = strtotime(str_replace("/","-",$birthdayDate));
+		$date = time();
+		$age = 0;
+		while($date > $dob = strtotime('+1 year', $dob))
+		{
+			++$age;
+		}
+		return $age;
+	}
 }

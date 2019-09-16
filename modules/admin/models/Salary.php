@@ -8,11 +8,11 @@ use Yii;
  * This is the model class for table "salary".
  *
  * @property int $id
- * @property int $employee_id
- * @property string $date
- * @property string $salary
+ * @property int $employees_id
+ * @property string $create_at
+ * @property int $salary
  *
- * @property Employee $employee
+ * @property Employees $employees
  */
 class Salary extends \yii\db\ActiveRecord
 {
@@ -30,11 +30,10 @@ class Salary extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['employee_id', 'date', 'salary'], 'required'],
-            [['employee_id'], 'integer'],
-            [['date'], 'safe'],
-            [['salary'], 'string', 'max' => 255],
-            [['employee_id'], 'exist', 'skipOnError' => true, 'targetClass' => Employee::className(), 'targetAttribute' => ['employee_id' => 'id']],
+            [['employees_id', 'create_at', 'salary'], 'required'],
+            [['employees_id', 'salary'], 'integer'],
+            [['create_at'], 'safe'],
+            [['employees_id'], 'exist', 'skipOnError' => true, 'targetClass' => Employee::className(), 'targetAttribute' => ['employees_id' => 'id']],
         ];
     }
 
@@ -45,8 +44,8 @@ class Salary extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'employee_id' => 'Employee ID',
-            'date' => 'Date',
+            'employees_id' => 'Employees ID',
+            'create_at' => 'Create At',
             'salary' => 'Salary',
         ];
     }
@@ -54,8 +53,8 @@ class Salary extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEmployee()
+    public function getEmployees()
     {
-        return $this->hasOne(Employee::className(), ['id' => 'employee_id']);
+        return $this->hasOne(Employee::className(), ['id' => 'employees_id']);
     }
 }

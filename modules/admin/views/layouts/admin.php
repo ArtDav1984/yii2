@@ -4,9 +4,9 @@
 	/* @var $content string */
 	
 	use yii\helpers\Html;
-	use app\assets\AppAsset;
+	use app\assets\AppAssetAdmin;
 	
-	AppAsset::register($this);
+	AppAssetAdmin::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -65,18 +65,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/admin/skill/index">
                             <span>Skills</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <span>Salary</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span>Cities</span>
+                            <span>Salaries</span>
                         </a>
                     </li>
                     <li>
