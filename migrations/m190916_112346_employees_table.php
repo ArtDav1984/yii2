@@ -10,7 +10,7 @@ use yii\db\Migration;
  * - `{{%departments}}`
  * - `{{%cities}}`
  */
-class m190916_112346_create_employees_table extends Migration
+class m190916_112346_employees_table extends Migration
 {
     /**
      * {@inheritdoc}

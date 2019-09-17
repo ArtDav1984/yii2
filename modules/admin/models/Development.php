@@ -5,7 +5,7 @@ namespace app\modules\admin\models;
 use Yii;
 
 /**
- * This is the model class for table "skills_employees".
+ * This is the model class for table "developments".
  *
  * @property int $id
  * @property int $skills_id
@@ -14,14 +14,14 @@ use Yii;
  * @property Employees $employees
  * @property Skills $skills
  */
-class SkillEmployee extends \yii\db\ActiveRecord
+class Development extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'skills_employees';
+        return 'developments';
     }
 
     /**
@@ -44,8 +44,8 @@ class SkillEmployee extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'skills_id' => 'Skills ID',
-            'employees_id' => 'Employees ID',
+            'skills_id' => 'Skills',
+            'employees_id' => 'Employees',
         ];
     }
 

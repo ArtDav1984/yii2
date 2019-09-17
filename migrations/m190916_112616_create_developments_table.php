@@ -3,20 +3,20 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%skills_employees}}`.
+ * Handles the creation of table `{{%developments}}`.
  * Has foreign keys to the tables:
  *
  * - `{{%skills}}`
  * - `{{%employees}}`
  */
-class m190916_112616_create_skills_employees_table extends Migration
+class m190916_112616_create_developments_table extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('{{%skills_employees}}', [
+        $this->createTable('{{%developments}}', [
             'id' => $this->primaryKey(),
             'skills_id' => $this->integer()->notNull(),
             'employees_id' => $this->integer()->notNull(),
@@ -24,15 +24,15 @@ class m190916_112616_create_skills_employees_table extends Migration
 
         // creates index for column `skills_id`
         $this->createIndex(
-            '{{%idx-skills_employees-skills_id}}',
-            '{{%skills_employees}}',
+            '{{%idx-developments-skills_id}}',
+            '{{%developments}}',
             'skills_id'
         );
 
         // add foreign key for table `{{%skills}}`
         $this->addForeignKey(
-            '{{%fk-skills_employees-skills_id}}',
-            '{{%skills_employees}}',
+            '{{%fk-developments-skills_id}}',
+            '{{%developments}}',
             'skills_id',
             '{{%skills}}',
             'id',
@@ -41,15 +41,15 @@ class m190916_112616_create_skills_employees_table extends Migration
 
         // creates index for column `employees_id`
         $this->createIndex(
-            '{{%idx-skills_employees-employees_id}}',
-            '{{%skills_employees}}',
+            '{{%idx-developments-employees_id}}',
+            '{{%developments}}',
             'employees_id'
         );
 
         // add foreign key for table `{{%employees}}`
         $this->addForeignKey(
-            '{{%fk-skills_employees-employees_id}}',
-            '{{%skills_employees}}',
+            '{{%fk-developments-employees_id}}',
+            '{{%developments}}',
             'employees_id',
             '{{%employees}}',
             'id',
@@ -64,28 +64,28 @@ class m190916_112616_create_skills_employees_table extends Migration
     {
         // drops foreign key for table `{{%skills}}`
         $this->dropForeignKey(
-            '{{%fk-skills_employees-skills_id}}',
-            '{{%skills_employees}}'
+            '{{%fk-developments-skills_id}}',
+            '{{%developments}}'
         );
 
         // drops index for column `skills_id`
         $this->dropIndex(
-            '{{%idx-skills_employees-skills_id}}',
-            '{{%skills_employees}}'
+            '{{%idx-developments-skills_id}}',
+            '{{%developments}}'
         );
 
         // drops foreign key for table `{{%employees}}`
         $this->dropForeignKey(
-            '{{%fk-skills_employees-employees_id}}',
-            '{{%skills_employees}}'
+            '{{%fk-developments-employees_id}}',
+            '{{%developments}}'
         );
 
         // drops index for column `employees_id`
         $this->dropIndex(
-            '{{%idx-skills_employees-employees_id}}',
-            '{{%skills_employees}}'
+            '{{%idx-developments-employees_id}}',
+            '{{%developments}}'
         );
 
-        $this->dropTable('{{%skills_employees}}');
+        $this->dropTable('{{%developments}}');
     }
 }

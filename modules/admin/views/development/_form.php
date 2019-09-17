@@ -5,11 +5,14 @@ use yii\bootstrap\ActiveForm;
 
 ?>
 
-<div class="skill-form">
+<div class="development-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($skill, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($development, 'employees_id')
+	         ->dropDownList($employeesList, ['id' => $development->employees['id']])?>
+
+    <?= $form->field($development, 'skills_id')->checkboxList($skillsList) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

@@ -70,13 +70,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/admin/salary/index">
                             <span>Salaries</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <span>Skills and Employees</span>
+                        <a href="/admin/development/index">
+                            <span>Developments</span>
                         </a>
                     </li>
                 </ul>

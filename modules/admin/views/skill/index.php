@@ -3,11 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
 
-/* @var $this yii\web\View */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
 $this->title = 'Skills';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="breadcrumbs">
     <ol class="breadcrumb">
@@ -29,13 +25,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <table class="table-bordered table-striped table">
         <tr>
             <th>ID</th>
-            <th>Skill</th>
-            <th colspan="2">Operations</th>
+            <th>Skill Name</th>
+            <th colspan="3">Operations</th>
         </tr>
 		<?php foreach ($skills as $skill): ?>
             <tr>
                 <td><?php echo $skill->id; ?></td>
                 <td><?php echo $skill->name; ?></td>
+                <td> <?= Html::a('<i class="fa fa-eye">', ['view', 'id' => $skill['id']]) ?></td>
                 <td> <?= Html::a('<i class="fa fa-pencil-square-o">', ['update', 'id' => $skill['id']]) ?></td>
                 <td><?= Html::a('<i class="fa fa-times"></i>', ['delete', 'id' => $skill['id']], [   'data' => [
 						'confirm' => 'Are you sure you want to delete this item?',

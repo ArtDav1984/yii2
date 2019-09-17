@@ -6,7 +6,7 @@ use Yii;
 use app\modules\admin\models\Employee;
 use app\modules\admin\models\Company;
 use app\modules\admin\models\Department;
-use app\modules\admin\models\City;
+use yii\filters\VerbFilter;
 use yii\data\Pagination;
 use yii\web\Controller;
 
@@ -15,6 +15,18 @@ use yii\web\Controller;
  */
 class EmployeeController extends Controller
 {
+	public function behaviors()
+	{
+		return [
+			'verbs' => [
+				'class' => VerbFilter::className(),
+				'actions' => [
+					'delete' => ['POST'],
+				],
+			],
+		];
+	}
+	
 	public function actionIndex()
 	{
 		$query = Employee::find()->with('companies', 'departments', 'skillsEmployees.skills');

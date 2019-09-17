@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Employee */
 
-$this->title = 'Update Employee';
+$this->title = 'Update Employee: '.$employee->first_name.' '.$employee->last_name;
 ?>
 <div class="breadcrumbs">
     <ol class="breadcrumb">

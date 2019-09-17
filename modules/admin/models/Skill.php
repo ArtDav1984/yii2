@@ -40,7 +40,7 @@ class Skill extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Skill Name',
         ];
     }
 
@@ -49,6 +49,6 @@ class Skill extends \yii\db\ActiveRecord
      */
     public function getSkillsEmployees()
     {
-        return $this->hasMany(SkillEmployee::className(), ['skills_id' => 'id']);
+        return $this->hasMany(Development::className(), ['skills_id' => 'id']);
     }
 }

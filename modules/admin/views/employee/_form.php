@@ -1,12 +1,9 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 use yii\jui\DatePicker;
 
-/* @var $this yii\web\View */
-/* @var $model app\modules\admin\models\Employee */
-/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="employee-form">

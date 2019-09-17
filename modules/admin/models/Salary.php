@@ -5,7 +5,7 @@ namespace app\modules\admin\models;
 use Yii;
 
 /**
- * This is the model class for table "salary".
+ * This is the model class for table "salaries".
  *
  * @property int $id
  * @property int $employees_id
@@ -21,7 +21,7 @@ class Salary extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'salary';
+        return 'salaries';
     }
 
     /**
@@ -44,7 +44,7 @@ class Salary extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'employees_id' => 'Employees ID',
+            'employees_id' => 'Employees',
             'create_at' => 'Create At',
             'salary' => 'Salary',
         ];

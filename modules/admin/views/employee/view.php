@@ -2,8 +2,6 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-
 $this->title = 'View';
 \yii\web\YiiAsset::register($this);
 

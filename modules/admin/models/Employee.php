@@ -45,7 +45,7 @@ class Employee extends \yii\db\ActiveRecord
             [['companies_id', 'departments_id', 'city', 'first_name', 'last_name', 'birthday', 'age', 'gender', 'address', 'phone_number', 'email'], 'required'],
             [['companies_id', 'departments_id', 'age', 'phone_number'], 'integer'],
             [['birthday'], 'safe'],
-            [['first_name', 'last_name', 'gender', 'city', 'address', 'email'], 'string', 'max' => 255],
+            [['first_name', 'last_name', 'city', 'address', 'email'], 'string', 'max' => 255],
             [['companies_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['companies_id' => 'id']],
             [['departments_id'], 'exist', 'skipOnError' => true, 'targetClass' => Department::className(), 'targetAttribute' => ['departments_id' => 'id']],
         ];
@@ -100,6 +100,6 @@ class Employee extends \yii\db\ActiveRecord
      */
     public function getSkillsEmployees()
     {
-        return $this->hasMany(SkillEmployee::className(), ['employees_id' => 'id']);
+        return $this->hasMany(Development::className(), ['employees_id' => 'id']);
     }
 }
