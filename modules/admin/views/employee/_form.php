@@ -16,27 +16,28 @@ use \roboapp\multiselect\MultiSelect;
 
 	<?= $form->field($employee, 'departments_id')
 	         ->dropDownList($departmentsList, ['prompt' => 'All Departments', 'id' => $employee->departments['id']]); ?>
-
-    <?php
-        $value = [];
-        $i = 1;
-        foreach ($employeesSkill as $item) {
-            if (count($item) > 0) {
-                $value[$i] = $item->skills_id;
-                $i++;
-            }
-        }
-    ?>
-	<?= MultiSelect::widget([
-        'options' => [
-            'multiple' => true,
-            'class' => 'form-control'
-        ],
-        'value' => $value, // or ['value_1', 'value_3']
-        'name' => 'skills_id',
-        'data' => $skillsList
-    ])
+	
+	<?php
+		$skills_ids = [];
+		
+		foreach ($employeesSkill as $item) {
+			if (count($item) > 0) {
+				$skills_ids[] = $item->skills_id;
+			}
+		}
 	?>
+    
+    <label>Skills</label>
+	<?= MultiSelect::widget([
+		'options' => [
+			'multiple' => true
+		],
+		'value' => $skills_ids,
+		'name' => 'skills_id',
+		'data' => $skillsList
+	])
+	?>
+    <br>
 
 	<?= $form->field($employee, 'first_name')->textInput(['maxlength' => true]) ?>
 	

@@ -28,7 +28,7 @@ $this->title = 'Salaries';
             <th>Created AT</th>
             <th>Salary</th>
             <th>Employees</th>
-            <th colspan="3">Operations</th>
+            <th colspan="3">Actions</th>
         </tr>
 		<?php foreach ($salaries as $salary): ?>
             <tr>
@@ -38,11 +38,9 @@ $this->title = 'Salaries';
                 <td><?php echo $salary->employees['first_name'].' '.$salary->employees['last_name']; ?></td>
                 <td> <?= Html::a('<i class="fa fa-eye">', ['view', 'id' => $salary['id']]) ?></td>
                 <td> <?= Html::a('<i class="fa fa-pencil-square-o">', ['update', 'id' => $salary['id']]) ?></td>
-                <td><?= Html::a('<i class="fa fa-times"></i>', ['delete', 'id' => $salary['id']], [   'data' => [
-						'confirm' => 'Are you sure you want to delete this item?',
-						'method' => 'post',
-					],
-					]) ?></td>
+                <td> <?= Html::a('History', ['history', 'id' => $salary->employees['id']],
+                                                 ['class' => 'btn btn-primary']) ?>
+                </td>
             </tr>
 		<?php endforeach; ?>
     </table>

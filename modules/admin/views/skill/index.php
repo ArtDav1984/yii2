@@ -26,7 +26,7 @@ $this->title = 'Skills';
         <tr>
             <th>ID</th>
             <th>Skill Name</th>
-            <th colspan="3">Operations</th>
+            <th colspan="3">Actions</th>
         </tr>
 		<?php foreach ($skills as $skill): ?>
             <tr>

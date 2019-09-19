@@ -33,7 +33,7 @@ $this->title = 'Employees';
             <th>Skill</th>
             <th>Name</th>
             <th>Age</th>
-            <th colspan="3">Operations</th>
+            <th colspan="3">Actions</th>
         </tr>
 		<?php foreach ($employees as $employee): ?>
             <tr>

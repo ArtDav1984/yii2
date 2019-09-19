@@ -20,13 +20,7 @@
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $salary->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $salary->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a('History', ['history', 'id' => $salary->employees['id']], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <table class="table-admin-small table-bordered table-striped table">

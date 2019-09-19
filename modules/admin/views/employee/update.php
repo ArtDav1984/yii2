@@ -11,7 +11,7 @@ $this->title = 'Update Employee: '.$employee->first_name.' '.$employee->last_nam
     <ol class="breadcrumb">
         <li><a href="/admin">Dashboard</a></li>
         <li><a href="/admin/employee/index">Employees</a></li>
-        <li class="active"><?= $this->title; ?></li>
+        <li class="active">Update</li>
     </ol>
 </div>
 <div class="employee-update">

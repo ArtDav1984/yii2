@@ -94,11 +94,19 @@ class Employee extends \yii\db\ActiveRecord
     {
         return $this->hasMany(EmployeesSkill::className(), ['employees_id' => 'id']);
     }
-
+	
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getSalaries()
+    {
+        return $this->hasOne(Salary::className(), ['employees_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSalariesHistory()
     {
         return $this->hasOne(Salary::className(), ['employees_id' => 'id']);
     }

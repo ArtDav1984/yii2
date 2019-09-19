@@ -94,7 +94,7 @@ $this->title = 'View';
         </tr>
         <tr>
             <td><b>Salary</b></td>
-            <td><?php echo $employee->salaries['salary'].'AMD'; ?></td>
+            <td><?php echo $employee->salaries['salary'].' AMD'; ?></td>
         </tr>
     </table>
 

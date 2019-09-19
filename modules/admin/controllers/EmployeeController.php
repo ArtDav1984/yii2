@@ -47,8 +47,7 @@ class EmployeeController extends Controller
 	
 	public function actionView($id)
 	{
-		$employee = Employee::find()->with('companies', 'departments', 'salaries', 'employeesSkills.skills')
-		                            ->where(['id' => $id])->one();
+		$employee = Employee::find()->with('companies', 'departments', 'salaries', 'employeesSkills.skills')->where(['id' => $id])->one();
 		
 		return $this->render('view', compact('employee'));
 	}
@@ -70,16 +69,16 @@ class EmployeeController extends Controller
 			$birthday = Yii::$app->request->post('Employee')['birthday'];
 			$employee->age = $this->calculateAge($birthday);
 			$employee->birthday = date_format(date_create("$birthday"), "Y-m-d");
+			
 			if ($employee->save()) {
 				if (Yii::$app->request->post('skills_id')) {
-					$selectedEmployee = $employee->id;
-					$selectedSkills = Yii::$app->request->post("skills_id");
+					$skills_ids = Yii::$app->request->post("skills_id");
 					
-					for ($i = 0; $i < count($selectedSkills); $i ++) {
+					foreach ($skills_ids as $item) {
 						Yii::$app->db->createCommand()
 						             ->insert('employees_skills', [
-							                  'employees_id' => $selectedEmployee,
-							                  'skills_id' => $selectedSkills[$i],
+							                  'employees_id' => $employee->id,
+							                  'skills_id' => $item,
 						             ])->execute();
 					}
 				}
@@ -109,15 +108,30 @@ class EmployeeController extends Controller
 			$birthday = Yii::$app->request->post('Employee')['birthday'];
 			$employee->age = $this->calculateAge($birthday);
 			$employee->birthday = date_format(date_create("$birthday"), "Y-m-d");
+			
 			if ($employee->save()) {
                 if (Yii::$app->request->post('skills_id')) {
-                    $selectedSkills = Yii::$app->request->post("skills_id");
+                    $skills_ids = Yii::$app->request->post("skills_id");
+				
+                    $empSkills=EmployeesSkill::find()->where(['employees_id' => $id])
+                                                     ->andWhere(['not in','skills_id',$skills_ids])
+                                                     ->all();
 
-                    for ($i = 0; $i < count($selectedSkills); $i ++) {
-                        //$skills_id = $selectedSkills[$i];
-                        Yii::$app->db->createCommand("UPDATE employees_skills SET 
-                        employees_id=$id, skills_id=$selectedSkills[$i] WHERE employees_id=$id")->execute();
+                    foreach ($empSkills as $empSkill){
+                        $empSkill->delete();
                     }
+
+	                for($i = 0; $i < count($skills_ids); $i ++){
+	                    if(EmployeesSkill::find()->where(['skills_id' => $skills_ids[$i]])
+                                                 ->andWhere(['employees_id' => $id])
+                                                 ->count()==0){
+	                        Yii::$app->db->createCommand()
+                                ->insert('employees_skills', [
+                                    'employees_id' => $id,
+                                    'skills_id' => $skills_ids[$i],
+                                ])->execute();
+	                    }
+	                }
                 }
 
 				return $this->redirect(['view', 'id' => $employee->id]);
@@ -149,8 +163,7 @@ class EmployeeController extends Controller
 		$dob = strtotime(str_replace("/","-",$birthdayDate));
 		$date = time();
 		$age = 0;
-		while($date > $dob = strtotime('+1 year', $dob))
-		{
+		while($date > $dob = strtotime('+1 year', $dob)) {
 			++$age;
 		}
 		return $age;
