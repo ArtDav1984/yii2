@@ -74,11 +74,6 @@
                             <span>Salaries</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="/admin/development/index">
-                            <span>Developments</span>
-                        </a>
-                    </li>
                 </ul>
             </div>
             <!-- sidebar-menu  -->

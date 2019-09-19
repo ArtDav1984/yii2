@@ -9,13 +9,14 @@ use yii\jui\DatePicker;
 <div class="salary-form">
 
     <?php $form = ActiveForm::begin(); ?>
-	
+
 	<?= $form->field($salary, 'employees_id')
-	         ->dropDownList($employeesList, ['id' => $salary->employees['id']]); ?>
+	         ->dropDownList($employeesList, ['id' => $salary->employees['id']]);
+	?>
 	
-	<?php $create_at = !is_null($salary->create_at) ? date('M j, Y', strtotime($salary->create_at)) : ''; ?>
+	<?php $created_at = !is_null($salary->created_at) ? date('M j, Y', strtotime($salary->created_at)) : ''; ?>
 	
-	<?= $form->field($salary, 'create_at')
+	<?= $form->field($salary, 'created_at')
 	         ->widget(DatePicker::className(), [
 		         'language' => 'en',
 		         'clientOptions' => [
@@ -24,7 +25,7 @@ use yii\jui\DatePicker;
 			         'dateFormat' => 'yyyy/MM/dd',
 			         'yearRange' => '2019:2050',
 		         ]
-	         ])->textInput(['class' => 'form-control', 'readonly' => true, 'value' => $create_at]) ?>
+	         ])->textInput(['class' => 'form-control', 'readonly' => true, 'value' => $created_at]) ?>
 
     <?= $form->field($salary, 'salary')->textInput() ?>
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9b5ae9be26d73970a6273fcfa6925beb",
+    "content-hash": "8cec6167844aea33d401b1d078f83f8c",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -26,6 +26,25 @@
             "license": [
                 "MIT"
             ]
+        },
+        {
+            "name": "bower-asset/bootstrap-multiselect",
+            "version": "v0.9.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/davidstutz/bootstrap-multiselect.git",
+                "reference": "4749da211e6d39644ef164cd709cfeae5ccba579"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/davidstutz/bootstrap-multiselect/zipball/4749da211e6d39644ef164cd709cfeae5ccba579",
+                "reference": "4749da211e6d39644ef164cd709cfeae5ccba579"
+            },
+            "require": {
+                "bower-asset/bootstrap": ">=2.3.2",
+                "bower-asset/jquery": ">=1.11.0"
+            },
+            "type": "bower-asset"
         },
         {
             "name": "bower-asset/inputmask",
@@ -85,6 +104,27 @@
             "type": "bower-asset",
             "license": [
                 "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/multiselect",
+            "version": "0.9.12",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:lou/multi-select.git",
+                "reference": "344dc6cfe0f9c3b3ee66e88bed7bfc7cc1adbb3a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lou/multi-select/zipball/344dc6cfe0f9c3b3ee66e88bed7bfc7cc1adbb3a",
+                "reference": "344dc6cfe0f9c3b3ee66e88bed7bfc7cc1adbb3a"
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.7.1"
+            },
+            "type": "bower-asset",
+            "license": [
+                "WTFPL"
             ]
         },
         {
@@ -347,6 +387,98 @@
                 "html"
             ],
             "time": "2019-07-14T18:58:38+00:00"
+        },
+        {
+            "name": "iripvanwinkle/yii2-multi-select",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/iRipVanWinkle/yii2-multi-select.git",
+                "reference": "98f245535191c48063718722315bb74ccb94fde1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iRipVanWinkle/yii2-multi-select/zipball/98f245535191c48063718722315bb74ccb94fde1",
+                "reference": "98f245535191c48063718722315bb74ccb94fde1",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/bootstrap-multiselect": "0.9.*",
+                "yiisoft/yii2": "2.0.*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "roboapp\\multiselect\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "iRipVanWinkle",
+                    "email": "iripvanwinkle@gmail.com"
+                }
+            ],
+            "description": "Multiselect Bootstrap widget for Yii2.",
+            "keywords": [
+                "extension",
+                "multiselect",
+                "widget",
+                "yii"
+            ],
+            "time": "2016-09-15T14:59:26+00:00"
+        },
+        {
+            "name": "muhiddingithub/yii2-multiple-select",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/muhiddingithub/yii2-multiple-select.git",
+                "reference": "bd08be1759ca8b8089e4705760fd33edeebf5566"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/muhiddingithub/yii2-multiple-select/zipball/bd08be1759ca8b8089e4705760fd33edeebf5566",
+                "reference": "bd08be1759ca8b8089e4705760fd33edeebf5566",
+                "shasum": ""
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "muhiddin\\select\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Muxiddin Jumaniyazov",
+                    "email": "hellomyhp@gmail.com"
+                }
+            ],
+            "description": "Multiple select element",
+            "keywords": [
+                "extension",
+                "jquery",
+                "muhiddin",
+                "multiple",
+                "multiple-select",
+                "select",
+                "widget",
+                "yii2"
+            ],
+            "time": "2017-10-25T07:29:27+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -644,6 +776,64 @@
                 "shim"
             ],
             "time": "2019-08-06T08:03:45+00:00"
+        },
+        {
+            "name": "wbraganca/yii2-multiselect",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wbraganca/yii2-multiselect.git",
+                "reference": "7217ac427d87c64b032555f56af6fa4ebb7c8d8a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wbraganca/yii2-multiselect/zipball/7217ac427d87c64b032555f56af6fa4ebb7c8d8a",
+                "reference": "7217ac427d87c64b032555f56af6fa4ebb7c8d8a",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/bootstrap-multiselect": "~0.9",
+                "bower-asset/multiselect": "~0.9",
+                "yiisoft/yii2": "~2.0.0",
+                "yiisoft/yii2-bootstrap": "~2.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "wbraganca\\multiselect\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Wanderson Bragança",
+                    "email": "wanderson.wbc@gmail.com",
+                    "homepage": "http://wbraganca.com"
+                }
+            ],
+            "description": "The yii2-multiselect is a Yii 2 wrapper for [Bootstrap Multiselect](http://davidstutz.github.io/bootstrap-multiselect/).",
+            "homepage": "https://github.com/wbraganca/yii2-multiselect",
+            "keywords": [
+                "dropdown",
+                "multiselect",
+                "select",
+                "wbraganca",
+                "yii2",
+                "yii2-multiselect"
+            ],
+            "time": "2016-10-27T11:00:46+00:00"
         },
         {
             "name": "yiisoft/yii2",
@@ -3856,7 +4046,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "muhiddingithub/yii2-multiple-select": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

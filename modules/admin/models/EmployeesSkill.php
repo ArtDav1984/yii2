@@ -5,23 +5,23 @@ namespace app\modules\admin\models;
 use Yii;
 
 /**
- * This is the model class for table "developments".
+ * This is the model class for table "employees_skills".
  *
  * @property int $id
- * @property int $skills_id
  * @property int $employees_id
+ * @property int $skills_id
  *
  * @property Employees $employees
  * @property Skills $skills
  */
-class Development extends \yii\db\ActiveRecord
+class EmployeesSkill extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'developments';
+        return 'employees_skills';
     }
 
     /**
@@ -30,8 +30,8 @@ class Development extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['skills_id', 'employees_id'], 'required'],
-            [['skills_id', 'employees_id'], 'integer'],
+            [['employees_id', 'skills_id'], 'required'],
+            [['employees_id', 'skills_id'], 'integer'],
             [['employees_id'], 'exist', 'skipOnError' => true, 'targetClass' => Employee::className(), 'targetAttribute' => ['employees_id' => 'id']],
             [['skills_id'], 'exist', 'skipOnError' => true, 'targetClass' => Skill::className(), 'targetAttribute' => ['skills_id' => 'id']],
         ];
@@ -44,8 +44,8 @@ class Development extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'employees_id' => 'Employees ID',
             'skills_id' => 'Skills',
-            'employees_id' => 'Employees',
         ];
     }
 

@@ -18,7 +18,7 @@ class m190916_112947_create_salaries_table extends Migration
         $this->createTable('{{%salaries}}', [
             'id' => $this->primaryKey(),
             'employees_id' => $this->integer()->notNull(),
-            'create_at' => $this->date()->notNull(),
+            'created_at' => $this->date()->notNull(),
             'salary' => $this->integer()->notNull(),
         ]);
 

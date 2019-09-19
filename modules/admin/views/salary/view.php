@@ -35,8 +35,8 @@
             <td><?php echo $salary->id; ?></td>
         </tr>
         <tr>
-            <td><b>Create AT</b></td>
-            <td><?php echo $salary->create_at; ?></td>
+            <td><b>Created AT</b></td>
+            <td><?php echo $salary->created_at; ?></td>
         </tr>
         <tr>
             <td><b>Salary</b></td>

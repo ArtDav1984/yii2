@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\jui\DatePicker;
+use \roboapp\multiselect\MultiSelect;
 
 ?>
 
@@ -11,11 +12,32 @@ use yii\jui\DatePicker;
     <?php $form = ActiveForm::begin(); ?>
 	
 	<?= $form->field($employee, 'companies_id')
-	         ->dropDownList($companiesList, ['id' => $employee->companies['id']]); ?>
-	
+	         ->dropDownList($companiesList, ['prompt' => 'All Companies', 'id' => $employee->companies['id']]); ?>
+
 	<?= $form->field($employee, 'departments_id')
-	         ->dropDownList($departmentsList, ['id' => $employee->departments['id']]); ?>
-	
+	         ->dropDownList($departmentsList, ['prompt' => 'All Departments', 'id' => $employee->departments['id']]); ?>
+
+    <?php
+        $value = [];
+        $i = 1;
+        foreach ($employeesSkill as $item) {
+            if (count($item) > 0) {
+                $value[$i] = $item->skills_id;
+                $i++;
+            }
+        }
+    ?>
+	<?= MultiSelect::widget([
+        'options' => [
+            'multiple' => true,
+            'class' => 'form-control'
+        ],
+        'value' => $value, // or ['value_1', 'value_3']
+        'name' => 'skills_id',
+        'data' => $skillsList
+    ])
+	?>
+
 	<?= $form->field($employee, 'first_name')->textInput(['maxlength' => true]) ?>
 	
 	<?= $form->field($employee, 'last_name')->textInput(['maxlength' => true]) ?>
@@ -32,7 +54,7 @@ use yii\jui\DatePicker;
 			         'yearRange' => '1950:2020',
 		         ]
 	         ])->textInput(['class' => 'form-control', 'readonly' => true, 'value' => $birthday]) ?>
-	
+
 	<?= $form->field($employee, 'gender')->radioList( ['male' => 'male', 'female' => 'female'] ); ?>
 
     <?= $form->field($employee, 'city')->textInput(['maxlength' => true]) ?>

@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property string $name
  *
- * @property SkillsEmployees[] $skillsEmployees
+ * @property EmployeesSkills[] $employeesSkills
  */
 class Skill extends \yii\db\ActiveRecord
 {
@@ -40,15 +40,15 @@ class Skill extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Skill Name',
+            'name' => 'Name',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSkillsEmployees()
+    public function getEmployeesSkills()
     {
-        return $this->hasMany(Development::className(), ['skills_id' => 'id']);
+        return $this->hasMany(EmployeesSkill::className(), ['skills_id' => 'id']);
     }
 }

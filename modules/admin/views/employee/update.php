@@ -17,7 +17,10 @@ $this->title = 'Update Employee: '.$employee->first_name.' '.$employee->last_nam
 <div class="employee-update">
 
     <h1><?= Html::encode($this->title.': ' . $employee->id) ?></h1>
-	
-	<?= $this->render('_form', compact('employee', 'companiesList', 'departmentsList')) ?>
+
+	<?php
+    echo $this->render('_form', compact('employee', 'employeesSkill', 'companiesList',
+		'departmentsList', 'skillsList'))
+    ?>
 
 </div>

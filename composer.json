@@ -18,7 +18,10 @@
         "yiisoft/yii2": "~2.0.14",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
-        "yiisoft/yii2-jui": "^2.0"
+        "yiisoft/yii2-jui": "^2.0",
+        "muhiddingithub/yii2-multiple-select": "dev-master",
+        "wbraganca/yii2-multiselect": "~1.0.1",
+        "iripvanwinkle/yii2-multi-select": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

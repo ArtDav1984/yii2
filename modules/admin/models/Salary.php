@@ -9,7 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property int $employees_id
- * @property string $create_at
+ * @property string $created_at
  * @property int $salary
  *
  * @property Employees $employees
@@ -30,9 +30,9 @@ class Salary extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['employees_id', 'create_at', 'salary'], 'required'],
+            [['employees_id', 'created_at', 'salary'], 'required'],
             [['employees_id', 'salary'], 'integer'],
-            [['create_at'], 'safe'],
+            [['created_at'], 'safe'],
             [['employees_id'], 'exist', 'skipOnError' => true, 'targetClass' => Employee::className(), 'targetAttribute' => ['employees_id' => 'id']],
         ];
     }
@@ -45,7 +45,7 @@ class Salary extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'employees_id' => 'Employees',
-            'create_at' => 'Create At',
+            'created_at' => 'Date',
             'salary' => 'Salary',
         ];
     }

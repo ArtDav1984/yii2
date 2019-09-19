@@ -44,12 +44,12 @@ $this->title = 'View';
         <tr>
             <td><b>Skill</b></td>
             <td>
-				<?php $skillsEmployees = $employee->skillsEmployees ?>
+				<?php $employeesSkills = $employee->employeesSkills ?>
 				<?php
 					$skills = '';
-					foreach ($skillsEmployees as $skillsEmployee):
+					foreach ($employeesSkills as $employeesSkill):
 						?>
-						<?php  $skills.=$skillsEmployee['skills']['name'].', ' ?>
+						<?php  $skills.=$employeesSkill['skills']['name'].', ' ?>
 					<?php endforeach;
 					$skills = rtrim($skills,', ');
 					echo $skills;
@@ -94,7 +94,7 @@ $this->title = 'View';
         </tr>
         <tr>
             <td><b>Salary</b></td>
-            <td><?php echo $employee->salaries['salary']; ?> AMD</td>
+            <td><?php echo $employee->salaries['salary'].'AMD'; ?></td>
         </tr>
     </table>
 

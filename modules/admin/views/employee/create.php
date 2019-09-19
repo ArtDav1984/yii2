@@ -18,6 +18,7 @@ use yii\helpers\Html;
 
     <h1><?= Html::encode($this->title) ?></h1>
 	
-	<?= $this->render('_form', compact('employee', 'companiesList', 'departmentsList')) ?>
+	<?= $this->render('_form', compact('employee', 'employeesSkill', 'companiesList',
+        'departmentsList', 'skillsList')) ?>
 
 </div>

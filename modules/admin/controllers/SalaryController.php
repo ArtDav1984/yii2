@@ -53,15 +53,20 @@ class SalaryController extends Controller
     public function actionCreate()
     {
         $salary = new Salary();
-        $employees = Employee::find()->select('id, first_name, last_name')
+        $employees = Employee::find()->with('salaries')->select('id, first_name, last_name')
                                      ->asArray()
                                      ->all();
-        
-        $employeesList = $this->createList($employees);
+
+        $employeesList = [];
+
+        foreach ($employees as $employee) {
+            $employeesList[$employee['id']] = $employee['first_name'].' '.$employee['last_name'];
+            unset($employeesList[$employee['salaries']['employees_id']]);
+        }
         
         if ($salary->load(Yii::$app->request->post())) {
-	        $create_at = Yii::$app->request->post('Salary')['create_at'];
-	        $salary->create_at = date_format(date_create("$create_at"), "Y-m-d");
+	        $created_at = Yii::$app->request->post('Salary')['created_at'];
+	        $salary->created_at = date_format(date_create("$created_at"), "Y-m-d");
 	        
 	        if ($salary->save()) {
 		        return $this->redirect(['view', 'id' => $salary->id]);
@@ -74,15 +79,14 @@ class SalaryController extends Controller
     public function actionUpdate($id)
     {
         $salary = Salary::find()->with('employees')->where(['id' => $id])->one();
-	    $employees = Employee::find()->select('id, first_name, last_name')
-	                         ->asArray()
-	                         ->all();
-	
-	    $employeesList = $this->createList($employees);
-	
-	    if ($salary->load(Yii::$app->request->post())) {
-		    $create_at = Yii::$app->request->post('Salary')['create_at'];
-		    $salary->create_at = date_format(date_create("$create_at"), "Y-m-d");
+
+        $employeesList = [
+            $salary->employees->id => $salary->employees->first_name.' '.$salary->employees->last_name
+        ];
+
+        if ($salary->load(Yii::$app->request->post())) {
+		    $created_at = Yii::$app->request->post('Salary')['created_at'];
+		    $salary->created_at = date_format(date_create("$created_at"), "Y-m-d");
 		
 		    if ($salary->save()) {
 			    return $this->redirect(['view', 'id' => $salary->id]);
@@ -105,8 +109,9 @@ class SalaryController extends Controller
 		
 		foreach ($model as $item) {
 			$list[$item['id']] = $item['first_name'].' '.$item['last_name'];
+			unset($list[$item['salaries']['employees_id']]);
 		}
-		
+
 		return $list;
 	}
 }

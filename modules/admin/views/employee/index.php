@@ -41,12 +41,12 @@ $this->title = 'Employees';
                 <td><?php echo $employee->companies['name']; ?></td>
                 <td><?php echo $employee->departments['name']; ?></td>
                 <td>
-					<?php $skillsEmployees = $employee->skillsEmployees; ?>
+					<?php $employeesSkills = $employee->employeesSkills; ?>
 					<?php
 						$skills = '';
-						foreach ($skillsEmployees as $skillsEmployee):
+						foreach ($employeesSkills as $employeesSkill):
 							?>
-							<?php  $skills.=$skillsEmployee['skills']['name'].', ' ?>
+							<?php  $skills.=$employeesSkill['skills']['name'].', ' ?>
 						<?php endforeach;
 						$skills = rtrim($skills,', ');
 						echo $skills;
