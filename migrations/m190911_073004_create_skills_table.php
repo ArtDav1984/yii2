@@ -15,6 +15,7 @@ class m190911_073004_create_skills_table extends Migration
         $this->createTable('{{%skills}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
+            'image' => $this->string()->null()
         ]);
     }
 

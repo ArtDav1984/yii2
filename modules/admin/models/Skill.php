@@ -3,6 +3,7 @@
 namespace app\modules\admin\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "skills".
@@ -29,7 +30,8 @@ class Skill extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['name'], 'string', 'max' => 255],
+            [['name'], 'string', 'min' => 2, 'max' => 30],
+            [['image'], 'file'],
         ];
     }
 
@@ -40,7 +42,8 @@ class Skill extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Skill Name',
+            'image' => 'Brand',
         ];
     }
 

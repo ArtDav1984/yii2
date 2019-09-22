@@ -4,28 +4,16 @@ namespace app\modules\admin\controllers;
 
 use Yii;
 use app\modules\admin\models\Skill;
+use yii\web\UploadedFile;
 use yii\filters\VerbFilter;
 use yii\data\Pagination;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 /**
  * SkillController implements the CRUD actions for Skill model.
  */
-class SkillController extends Controller
+class SkillController extends AppAdminController
 {
-	public function behaviors()
-	{
-		return [
-			'verbs' => [
-				'class' => VerbFilter::className(),
-				'actions' => [
-					'delete' => ['POST'],
-				],
-			],
-		];
-	}
-	
     public function actionIndex()
     {
 	    $query = Skill::find();
@@ -53,8 +41,17 @@ class SkillController extends Controller
     {
 	    $skill = new Skill();
 	
-	    if ($skill->load(Yii::$app->request->post()) && $skill->save()) {
-		    return $this->redirect(['view', 'id' => $skill->id]);
+	    if ($skill->load(Yii::$app->request->post())) {
+            $skill->image = UploadedFile::getInstance($skill, 'image');
+            if (!is_null($skill->image)) {
+                if ($skill->validate()) {
+                    $skill->image->saveAs('uploads/skills/' . $skill->image->baseName . '.' . $skill->image->extension);
+                }
+            }
+
+            if ($skill->save()) {
+                return $this->redirect(['view', 'id' => $skill->id]);
+            }
 	    }
 	
 	    return $this->render('create', compact('skill'));
@@ -64,8 +61,26 @@ class SkillController extends Controller
     {
         $skill = $this->findModel($id);
 
-        if ($skill->load(Yii::$app->request->post()) && $skill->save()) {
-            return $this->redirect(['view', 'id' => $skill->id]);
+        if ($skill->load(Yii::$app->request->post())) {
+            $skill->image = UploadedFile::getInstance($skill, 'image');
+            $image = Skill::find()->select('image')
+                                  ->where(['id' => $id])
+                                  ->asArray()
+                                  ->one()['image'];
+
+            if ($image) {
+                unlink('uploads/skills/' . $image);
+            }
+
+            if (!is_null($skill->image)) {
+                if ($skill->validate()) {
+                    $skill->image->saveAs('uploads/skills/' . $skill->image->baseName . '.' . $skill->image->extension);
+                }
+            }
+
+            if ($skill->save()) {
+                return $this->redirect(['view', 'id' => $skill->id]);
+            }
         }
 
         return $this->render('update', compact('skill'));

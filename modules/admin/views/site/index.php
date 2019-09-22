@@ -18,7 +18,7 @@
         <div class="col-md-3">
         <div class="square-service-block">
                 <div class="ssb-icon">
-                    <?= Html::img(Url::to('@web/img/companies/'.$company['img_path']))?>
+                    <?= Html::img(Url::to('@web/img/companies/'.$company['image']))?>
                 </div>
                 <h2 class="ssb-title"><?= $company['name']; ?></h2>
         </div>

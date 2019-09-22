@@ -516,3 +516,8 @@ h2.ssb-title {
 table tr th, table tr td, label, li, p{
     font-size: 15px !important;
 }
+
+.employee_image, .skill_image {
+    width: 100px;
+    height: 100px;
+}

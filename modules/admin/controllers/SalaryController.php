@@ -6,27 +6,14 @@ use Yii;
 use app\modules\admin\models\Salary;
 use app\modules\admin\models\SalariesHistory;
 use app\modules\admin\models\Employee;
-use yii\web\Controller;
 use yii\data\Pagination;
 use yii\filters\VerbFilter;
 
 /**
  * SalaryController implements the CRUD actions for Salary model.
  */
-class SalaryController extends Controller
+class SalaryController extends AppAdminController
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-	
     public function actionIndex()
     {
 	    $query = Salary::find()->with('employees');

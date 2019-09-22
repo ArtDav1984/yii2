@@ -4,12 +4,13 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\jui\DatePicker;
 use \roboapp\multiselect\MultiSelect;
+use yii\helpers\Url;
 
 ?>
 
 <div class="employee-form">
     
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 	
 	<?= $form->field($employee, 'companies_id')
 	         ->dropDownList($companiesList, ['prompt' => 'All Companies', 'id' => $employee->companies['id']]); ?>
@@ -65,6 +66,11 @@ use \roboapp\multiselect\MultiSelect;
 	<?= $form->field($employee, 'phone_number')->textInput() ?>
 	
 	<?= $form->field($employee, 'email')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($employee, 'image')->fileInput() ?>
+
+    <?=  Html::img(Url::to('@web/uploads/employees/'.$employee->image), ['class' => 'employee_image']) ?>
+    <br><br>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

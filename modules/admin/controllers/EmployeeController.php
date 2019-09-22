@@ -9,27 +9,16 @@ use app\modules\admin\models\Department;
 use app\modules\admin\models\Skill;
 use app\modules\admin\models\EmployeesSkill;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 use yii\data\Pagination;
-use yii\web\Controller;
+
 
 /**
  * EmployeeController implements the CRUD actions for Employee model.
  */
-class EmployeeController extends Controller
+class EmployeeController extends AppAdminController
 {
-	public function behaviors()
-	{
-		return [
-			'verbs' => [
-				'class' => VerbFilter::className(),
-				'actions' => [
-					'delete' => ['POST'],
-				],
-			],
-		];
-	}
-	
-	public function actionIndex()
+    public function actionIndex()
 	{
 		$query = Employee::find()->with('companies', 'departments', 'employeesSkills.skills');
 		
@@ -69,11 +58,18 @@ class EmployeeController extends Controller
 			$birthday = Yii::$app->request->post('Employee')['birthday'];
 			$employee->age = $this->calculateAge($birthday);
 			$employee->birthday = date_format(date_create("$birthday"), "Y-m-d");
-			
+
+            $employee->image = UploadedFile::getInstance($employee, 'image');
+            if (!is_null($employee->image)) {
+                if ($employee->validate()) {
+                    $employee->image->saveAs('uploads/employees/' . $employee->image->baseName . '.' . $employee->image->extension);
+                }
+            }
+
 			if ($employee->save()) {
 				if (Yii::$app->request->post('skills_id')) {
 					$skills_ids = Yii::$app->request->post("skills_id");
-					
+
 					foreach ($skills_ids as $item) {
 						Yii::$app->db->createCommand()
 						             ->insert('employees_skills', [
@@ -82,8 +78,8 @@ class EmployeeController extends Controller
 						             ])->execute();
 					}
 				}
-				
-				return $this->redirect(['view', 'id' => $employee->id]);
+
+                return $this->redirect(['view', 'id' => $employee->id]);
 			}
 		}
 		
@@ -108,6 +104,21 @@ class EmployeeController extends Controller
 			$birthday = Yii::$app->request->post('Employee')['birthday'];
 			$employee->age = $this->calculateAge($birthday);
 			$employee->birthday = date_format(date_create("$birthday"), "Y-m-d");
+
+            $employee->image = UploadedFile::getInstance($employee, 'image');
+            $image = Employee::find()->select('image')
+                ->where(['id' => $id])
+                ->asArray()
+                ->one()['image'];
+
+            if ($image) {
+                unlink('uploads/employees/' . $image);
+            }
+            if (!is_null($employee->image)) {
+                if ($employee->validate()) {
+                    $employee->image->saveAs('uploads/employees/' . $employee->image->baseName . '.' . $employee->image->extension);
+                }
+            }
 			
 			if ($employee->save()) {
                 if (Yii::$app->request->post('skills_id')) {

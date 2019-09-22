@@ -1,10 +1,8 @@
 <?php
 	
-	/* @var $this \yii\web\View */
-	/* @var $content string */
-	
 	use yii\helpers\Html;
 	use app\assets\AppAssetAdmin;
+	use yii\bootstrap\ActiveForm;
 	
 	AppAssetAdmin::register($this);
 ?>
@@ -102,14 +100,14 @@
 
                         <!-- Links -->
                         <ul class="nav navbar-nav">
-                            <li><a href="/">Home</a></li>
-                            <li><a href="#">Logout</a></li>
+                            <li><a href="/" target="_blank">Home</a></li>
+                            <li><a href="/site/logout">Logout</a></li>
                         </ul>
 
                         <!-- Search -->
-                        <form class="navbar-form navbar-right" role="search">
+                       <form action="/admin/site/search" class="navbar-form navbar-right">
                             <div class="form-group">
-                                <input type="text" class="form-control">
+                                <input type="text" name="employee" class="form-control" placeholder="Employee search">
                             </div>
                             <button type="submit" class="btn btn-default">Search</button>
                         </form>

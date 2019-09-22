@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = 'View';
 \yii\web\YiiAsset::register($this);
@@ -95,6 +96,10 @@ $this->title = 'View';
         <tr>
             <td><b>Salary</b></td>
             <td><?php echo $employee->salaries['salary'].' AMD'; ?></td>
+        </tr>
+        <tr>
+            <td><b>Image</b></td>
+            <td><?php echo Html::img(Url::to('@web/uploads/employees/'.$employee->image), ['class' => 'employee_image']) ?></td>
         </tr>
     </table>
 

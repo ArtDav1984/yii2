@@ -44,8 +44,8 @@ class Salary extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'employees_id' => 'Employees',
-            'created_at' => 'Date',
+            'employees_id' => 'Employee',
+            'created_at' => 'Create AT',
             'salary' => 'Salary',
         ];
     }

@@ -1,6 +1,7 @@
 <?php
 	
-	use yii\helpers\Html;
+use yii\helpers\Html;
+use yii\helpers\Url;
 	
 	/* @var $this yii\web\View */
 	
@@ -39,6 +40,10 @@
 			<td><b>Skill Name</b></td>
 			<td><?php echo $skill->name; ?></td>
 		</tr>
+        <tr>
+            <td><b>Brand</b></td>
+            <td><?php echo Html::img(Url::to('@web/uploads/skills/'.$skill->image), ['class' => 'skill_image']) ?></td>
+        </tr>
 	</table>
 
 </div>

@@ -3,6 +3,7 @@
 namespace app\modules\admin\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "employees".
@@ -42,9 +43,12 @@ class Employee extends \yii\db\ActiveRecord
     {
         return [
             [['companies_id', 'departments_id', 'first_name', 'last_name', 'birthday', 'age', 'gender', 'city', 'address', 'phone_number', 'email'], 'required'],
-            [['companies_id', 'departments_id', 'age', 'phone_number'], 'integer'],
+            [['companies_id', 'departments_id', 'phone_number', 'age'], 'integer'],
             [['birthday'], 'safe'],
-            [['first_name', 'last_name', 'gender', 'city', 'address', 'email'], 'string', 'max' => 255],
+	        [['email'], 'email'],
+            [['image'], 'file'],
+	        [['first_name', 'last_name', 'city'], 'match', 'pattern' => '/[A-Za-z-]$/'],
+            [['first_name', 'last_name', 'gender', 'city', 'address', 'email'], 'string', 'min' => 2, 'max' => 30],
             [['companies_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['companies_id' => 'id']],
             [['departments_id'], 'exist', 'skipOnError' => true, 'targetClass' => Department::className(), 'targetAttribute' => ['departments_id' => 'id']],
         ];
@@ -57,8 +61,8 @@ class Employee extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'companies_id' => 'Companies',
-            'departments_id' => 'Departments',
+            'companies_id' => 'Company',
+            'departments_id' => 'Department',
             'first_name' => 'First Name',
             'last_name' => 'Last Name',
             'birthday' => 'Birthday',
@@ -68,6 +72,7 @@ class Employee extends \yii\db\ActiveRecord
             'address' => 'Address',
             'phone_number' => 'Phone Number',
             'email' => 'Email',
+            'image' => 'Image',
         ];
     }
 
