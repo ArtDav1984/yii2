@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\LinkPager;
 
 
@@ -10,7 +11,7 @@ $this->title = 'Employees';
 ?>
 <div class="breadcrumbs">
     <ol class="breadcrumb">
-        <li><a href="/admin">Dashboard</a></li>
+        <li><a href="<?= Url::to(['/admin']) ?>">Dashboard</a></li>
         <li class="active"><?= $this->title; ?></li>
     </ol>
 </div>
@@ -34,9 +35,9 @@ $this->title = 'Employees';
         </tr>
         <?php foreach ($employees as $employee): ?>
             <tr>
-                <td><?php echo $employee->city; ?></td>
-                <td><?php echo $employee->companies['name']; ?></td>
-                <td><?php echo $employee->departments['name']; ?></td>
+                <td><?= $employee->city; ?></td>
+                <td><?= $employee->companies['name']; ?></td>
+                <td><?= $employee->departments['name']; ?></td>
                 <td>
                     <?php $employeesSkills = $employee->employeesSkills; ?>
                     <?php
@@ -50,8 +51,8 @@ $this->title = 'Employees';
                     ?>
 
                 </td>
-                <td><?php echo $employee->first_name.' '.$employee->last_name; ?></td>
-                <td><?php echo $employee->age; ?></td>
+                <td><?= $employee->first_name.' '.$employee->last_name; ?></td>
+                <td><?= $employee->age; ?></td>
                 <td><?= Html::a('<i class="fa fa-eye">', ['/admin/employee/view', 'id' => $employee['id']]) ?></td>
                 <td> <?= Html::a('<i class="fa fa-pencil-square-o">', ['/admin/employee/update', 'id' => $employee['id']]) ?></td>
                 <td><?= Html::a('<i class="fa fa-times"></i>', ['/admin/employee/delete', 'id' => $employee['id']], [   'data' => [
@@ -63,7 +64,7 @@ $this->title = 'Employees';
         <?php endforeach; ?>
     </table>
 
-    <?php echo LinkPager::widget([
+    <?= LinkPager::widget([
         'pagination' => $pagination,
     ]); ?>
 

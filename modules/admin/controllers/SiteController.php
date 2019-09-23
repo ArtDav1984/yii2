@@ -59,4 +59,23 @@
 			
 			return $this->render('search', compact('employees', 'pagination'));
 		}
+		
+		public function actionView($id)
+		{
+			$this->view->title = Company::findOne($id)['name'];
+			
+			$query = Employee::find()->with('companies', 'departments', 'employeesSkills.skills')
+			                         ->where(['companies_id' => $id]);
+			
+			$count = $query->count();
+			
+			$pagination = new Pagination(['totalCount' => $count]);
+			$pagination->defaultPageSize = 10;
+			
+			$employees = $query->offset($pagination->offset)
+			                   ->limit($pagination->limit)
+			                   ->all();
+			
+			return $this->render('view', compact('employees', 'pagination'));
+		}
 	}

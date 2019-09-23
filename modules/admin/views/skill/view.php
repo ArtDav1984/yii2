@@ -2,8 +2,8 @@
 	
 use yii\helpers\Html;
 use yii\helpers\Url;
-	
-	/* @var $this yii\web\View */
+
+ 
 	
 	$this->title = 'View';
 	\yii\web\YiiAsset::register($this);
@@ -11,8 +11,8 @@ use yii\helpers\Url;
 ?>
 <div class="breadcrumbs">
 	<ol class="breadcrumb">
-		<li><a href="/admin">Dashboard</a></li>
-		<li><a href="/admin/skill/index">Skills</a></li>
+		<li><a href="<?= Url::to(['/admin']) ?>">Dashboard</a></li>
+		<li><a href="<?= Url::to(['/admin/skill/index']) ?>">Skills</a></li>
 		<li class="active"><?= $this->title; ?></li>
 	</ol>
 </div>
@@ -34,15 +34,15 @@ use yii\helpers\Url;
 	<table class="table-admin-small table-bordered table-striped table">
 		<tr>
 			<td><b>ID</b></td>
-			<td><?php echo $skill->id; ?></td>
+			<td><?= $skill->id; ?></td>
 		</tr>
 		<tr>
 			<td><b>Skill Name</b></td>
-			<td><?php echo $skill->name; ?></td>
+			<td><?= $skill->name; ?></td>
 		</tr>
         <tr>
             <td><b>Brand</b></td>
-            <td><?php echo Html::img(Url::to('@web/uploads/skills/'.$skill->image), ['class' => 'skill_image']) ?></td>
+            <td><?= Html::img(Url::to('@web/uploads/skills/'.$skill->image), ['class' => 'skill_image']) ?></td>
         </tr>
 	</table>
 

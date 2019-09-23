@@ -2,7 +2,7 @@
 	
 	use yii\helpers\Html;
 	use app\assets\AppAssetAdmin;
-	use yii\bootstrap\ActiveForm;
+	use yii\helpers\Url;
 	
 	AppAssetAdmin::register($this);
 ?>
@@ -53,22 +53,22 @@
                         <span>Menagment</span>
                     </li>
                     <li>
-                        <a href="/admin">
+                        <a href="<?= Url::to(['/admin']) ?>">
                             <span>Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/admin/employee/index">
-                            <span>Employees</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/skill/index">
+                        <a href="<?= Url::to(['/admin/skill/index']) ?>">
                             <span>Skills</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/admin/salary/index">
+                        <a href="<?= Url::to(['/admin/employee/index']) ?>">
+                            <span>Employees</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?= Url::to(['/admin/salary/index']) ?>">
                             <span>Salaries</span>
                         </a>
                     </li>
@@ -100,12 +100,12 @@
 
                         <!-- Links -->
                         <ul class="nav navbar-nav">
-                            <li><a href="/" target="_blank">Home</a></li>
-                            <li><a href="/site/logout">Logout</a></li>
+                            <li><a href="<?= Url::to(['/']) ?>" target="_blank">Home</a></li>
+                            <li><a href="<?= Url::to(['/site/logout']) ?>">Logout</a></li>
                         </ul>
 
                         <!-- Search -->
-                       <form action="/admin/site/search" class="navbar-form navbar-right">
+                       <form action="<?= Url::to(['/admin/site/search']) ?>" class="navbar-form navbar-right">
                             <div class="form-group">
                                 <input type="text" name="employee" class="form-control" placeholder="Employee search">
                             </div>

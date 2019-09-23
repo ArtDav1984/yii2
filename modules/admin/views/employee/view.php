@@ -9,8 +9,8 @@ $this->title = 'View';
 ?>
 <div class="breadcrumbs">
     <ol class="breadcrumb">
-        <li><a href="/admin">Dashboard</a></li>
-        <li><a href="/admin/employee/index">Employees</a></li>
+        <li><a href="<?= Url::to(['/admin']) ?>">Dashboard</a></li>
+        <li><a href="<?= Url::to(['/admin/employee/index']) ?>">Employees</a></li>
         <li class="active"><?= $this->title; ?></li>
     </ol>
 </div>
@@ -32,15 +32,15 @@ $this->title = 'View';
     <table class="table-admin-small table-bordered table-striped table">
         <tr>
             <td><b>ID</b></td>
-            <td><?php echo $employee->id; ?></td>
+            <td><?= $employee->id; ?></td>
         </tr>
         <tr>
             <td><b>Company</b></td>
-            <td><?php echo $employee->companies['name']; ?></td>
+            <td><?= $employee->companies['name']; ?></td>
         </tr>
         <tr>
             <td><b>Department</b></td>
-            <td><?php echo $employee->departments['name']; ?></td>
+            <td><?= $employee->departments['name']; ?></td>
         </tr>
         <tr>
             <td><b>Skill</b></td>
@@ -50,7 +50,7 @@ $this->title = 'View';
 					$skills = '';
 					foreach ($employeesSkills as $employeesSkill):
 						?>
-						<?php  $skills.=$employeesSkill['skills']['name'].', ' ?>
+						<?php  $skills .= $employeesSkill['skills']['name'].', ' ?>
 					<?php endforeach;
 					$skills = rtrim($skills,', ');
 					echo $skills;
@@ -59,47 +59,47 @@ $this->title = 'View';
         </tr>
         <tr>
             <td><b>First Name</b></td>
-            <td><?php echo $employee->first_name; ?></td>
+            <td><?= $employee->first_name; ?></td>
         </tr>
         <tr>
             <td><b>Last Name</b></td>
-            <td><?php echo $employee->last_name; ?></td>
+            <td><?= $employee->last_name; ?></td>
         </tr>
         <tr>
             <td><b>Birthday</b></td>
-            <td><?php echo date('M j, Y', strtotime($employee->birthday)); ?></td>
+            <td><?= date('M j, Y', strtotime($employee->birthday)); ?></td>
         </tr>
         <tr>
             <td><b>Age</b></td>
-            <td><?php echo $employee->age; ?></td>
+            <td><?= $employee->age; ?></td>
         </tr>
         <tr>
             <td><b>Gender</b></td>
-            <td><?php echo $employee['gender']; ?></td>
+            <td><?= $employee['gender']; ?></td>
         </tr>
         <tr>
             <td><b>City</b></td>
-            <td><?php echo $employee->city; ?></td>
+            <td><?= $employee->city; ?></td>
         </tr>
         <tr>
             <td><b>Address</b></td>
-            <td><?php echo $employee->address; ?></td>
+            <td><?= $employee->address; ?></td>
         </tr>
         <tr>
             <td><b>Phone Number</b></td>
-            <td><?php echo $employee->phone_number; ?></td>
+            <td><?= $employee->phone_number; ?></td>
         </tr>
         <tr>
             <td><b>Email</b></td>
-            <td><?php echo $employee->email; ?></td>
+            <td><?= $employee->email; ?></td>
         </tr>
         <tr>
             <td><b>Salary</b></td>
-            <td><?php echo $employee->salaries['salary'].' AMD'; ?></td>
+            <td><?= $employee->salaries['salary'].' AMD'; ?></td>
         </tr>
         <tr>
             <td><b>Image</b></td>
-            <td><?php echo Html::img(Url::to('@web/uploads/employees/'.$employee->image), ['class' => 'employee_image']) ?></td>
+            <td><?= Html::img(Url::to('@web/uploads/employees/'.$employee->image), ['class' => 'employee_image']) ?></td>
         </tr>
     </table>
 

@@ -28,6 +28,7 @@ use yii\helpers\Url;
 		}
 	?>
     
+    <?php if (count($skillsList) > 0) : ?>
     <label>Skills</label>
 	<?= MultiSelect::widget([
 		'options' => [
@@ -39,6 +40,7 @@ use yii\helpers\Url;
 	])
 	?>
     <br>
+    <?php endif; ?>
 
 	<?= $form->field($employee, 'first_name')->textInput(['maxlength' => true]) ?>
 	

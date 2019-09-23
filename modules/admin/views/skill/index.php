@@ -1,13 +1,14 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\LinkPager;
 
 $this->title = 'Skills';
 ?>
 <div class="breadcrumbs">
     <ol class="breadcrumb">
-        <li><a href="/admin">Dashboard</a></li>
+        <li><a href="<?= Url::to(['/admin']) ?>">Dashboard</a></li>
         <li class="active"><?= $this->title; ?></li>
     </ol>
 </div>
@@ -20,7 +21,7 @@ $this->title = 'Skills';
     </p>
 
 
-    <p>Items: <?= count($skills); ?></p>
+    <p>Count: <?= count($skills); ?></p>
 
     <table class="table-bordered table-striped table">
         <tr>
@@ -30,8 +31,8 @@ $this->title = 'Skills';
         </tr>
 		<?php foreach ($skills as $skill): ?>
             <tr>
-                <td><?php echo $skill->id; ?></td>
-                <td><?php echo $skill->name; ?></td>
+                <td><?= $skill->id; ?></td>
+                <td><?= $skill->name; ?></td>
                 <td> <?= Html::a('<i class="fa fa-eye">', ['view', 'id' => $skill['id']]) ?></td>
                 <td> <?= Html::a('<i class="fa fa-pencil-square-o">', ['update', 'id' => $skill['id']]) ?></td>
                 <td><?= Html::a('<i class="fa fa-times"></i>', ['delete', 'id' => $skill['id']], [   'data' => [
@@ -43,7 +44,7 @@ $this->title = 'Skills';
 		<?php endforeach; ?>
     </table>
 	
-	<?php echo LinkPager::widget([
+	<?= LinkPager::widget([
 		'pagination' => $pagination,
 	]); ?>
 

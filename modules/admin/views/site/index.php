@@ -16,12 +16,14 @@
     <h2>Companies</h2>
     <?php foreach ($companies as $company) : ?>
         <div class="col-md-3">
-        <div class="square-service-block">
+        <a  href="<?= Url::to(['/admin/site/view', 'id' => $company['id']]) ?>">
+        <div class="square-service-block companies_block">
                 <div class="ssb-icon">
                     <?= Html::img(Url::to('@web/img/companies/'.$company['image']))?>
                 </div>
                 <h2 class="ssb-title"><?= $company['name']; ?></h2>
         </div>
+        </a>
     </div>
     <?php endforeach; ?>
 </div>

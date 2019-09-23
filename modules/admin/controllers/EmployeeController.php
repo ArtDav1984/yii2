@@ -8,7 +8,6 @@ use app\modules\admin\models\Company;
 use app\modules\admin\models\Department;
 use app\modules\admin\models\Skill;
 use app\modules\admin\models\EmployeesSkill;
-use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\data\Pagination;
 
@@ -61,9 +60,7 @@ class EmployeeController extends AppAdminController
 
             $employee->image = UploadedFile::getInstance($employee, 'image');
             if (!is_null($employee->image)) {
-                if ($employee->validate()) {
-                    $employee->image->saveAs('uploads/employees/' . $employee->image->baseName . '.' . $employee->image->extension);
-                }
+	            $employee->image->saveAs('uploads/employees/' . $employee->image->baseName . '.' . $employee->image->extension);
             }
 
 			if ($employee->save()) {
@@ -91,6 +88,7 @@ class EmployeeController extends AppAdminController
 	{
 		$employee = Employee::find()->with('companies', 'departments')->where(['id' => $id])->one();
 		$employeesSkill = EmployeesSkill::find()->where(['employees_id' => $id])->all();
+		$image = $employee->image;
 
 		$companies = Company::find()->asArray()->all();
 		$departments = Department::find()->asArray()->all();
@@ -106,18 +104,14 @@ class EmployeeController extends AppAdminController
 			$employee->birthday = date_format(date_create("$birthday"), "Y-m-d");
 
             $employee->image = UploadedFile::getInstance($employee, 'image');
-            $image = Employee::find()->select('image')
-                ->where(['id' => $id])
-                ->asArray()
-                ->one()['image'];
 
             if ($image) {
-                unlink('uploads/employees/' . $image);
+                if (file_exists('uploads/employees/' . $image)) {
+                    unlink('uploads/employees/' . $image);
+                }
             }
             if (!is_null($employee->image)) {
-                if ($employee->validate()) {
-                    $employee->image->saveAs('uploads/employees/' . $employee->image->baseName . '.' . $employee->image->extension);
-                }
+	            $employee->image->saveAs('uploads/employees/' . $employee->image->baseName . '.' . $employee->image->extension);
             }
 			
 			if ($employee->save()) {
@@ -155,7 +149,15 @@ class EmployeeController extends AppAdminController
 	
 	public function actionDelete($id)
 	{
-		Employee::findOne($id)->delete();
+		$employee = Employee::findOne($id);
+		$image = $employee->image;
+		$employee->delete();
+		
+		if ($image) {
+		    if (file_exists('uploads/employees/' . $image)) {
+                unlink('uploads/employees/' . $image);
+            }
+		}
 		
 		return $this->redirect(['index']);
 	}

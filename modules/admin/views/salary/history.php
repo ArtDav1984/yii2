@@ -1,14 +1,15 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\LinkPager;
 
 $this->title = 'History';
 ?>
 <div class="breadcrumbs">
     <ol class="breadcrumb">
-        <li><a href="/admin">Dashboard</a></li>
-        <li><a href="/admin/salary/index">Salaries</a></li>
+        <li><a href="<?= Url::to(['/admin']) ?>">Dashboard</a></li>
+        <li><a href="<?= Url::to(['/admin/salary/index']) ?>">Salaries</a></li>
         <li class="active"><?= $this->title; ?></li>
     </ol>
 </div>
@@ -26,10 +27,10 @@ $this->title = 'History';
         </tr>
         <?php foreach ($salariesHistory as $salaryHistory): ?>
             <tr>
-                <td><?php echo $salaryHistory->id; ?></td>
-                <td><?php echo $salaryHistory->created_at; ?></td>
-                <td><?php echo $salaryHistory->salary; ?></td>
-                <td><?php echo $salaryHistory->employees['first_name'].' '.$salaryHistory->employees['last_name']; ?></td>
+                <td><?= $salaryHistory->id; ?></td>
+                <td><?= $salaryHistory->created_at; ?></td>
+                <td><?= $salaryHistory->salary; ?></td>
+                <td><?= $salaryHistory->employees['first_name'].' '.$salaryHistory->employees['last_name']; ?></td>
                 <td><?= Html::a('Delete', ['delete', 'id' => $salaryHistory['id']],
                                                ['class' => 'btn btn-danger'],
                                                [   'data' => [
@@ -42,7 +43,7 @@ $this->title = 'History';
         <?php endforeach; ?>
     </table>
 
-    <?php echo LinkPager::widget([
+    <?= LinkPager::widget([
         'pagination' => $pagination,
     ]); ?>
 

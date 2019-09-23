@@ -1,14 +1,15 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 
 $this->title = 'Update Skill: ' . $skill->name;
 ?>
 <div class="breadcrumbs">
     <ol class="breadcrumb">
-        <li><a href="/admin">Dashboard</a></li>
-        <li><a href="/admin/skill/index">Skills</a></li>
+        <li><a href="<?= Url::to(['/admin']) ?>">Dashboard</a></li>
+        <li><a href="<?= Url::to(['/admin/skill/index']) ?>">Skills</a></li>
         <li class="active">Update</li>
     </ol>
 </div>

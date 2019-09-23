@@ -7,7 +7,6 @@ use app\modules\admin\models\Salary;
 use app\modules\admin\models\SalariesHistory;
 use app\modules\admin\models\Employee;
 use yii\data\Pagination;
-use yii\filters\VerbFilter;
 
 /**
  * SalaryController implements the CRUD actions for Salary model.

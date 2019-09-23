@@ -1,13 +1,14 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = 'Create Salary';
 ?>
 <div class="breadcrumbs">
     <ol class="breadcrumb">
-        <li><a href="/admin">Dashboard</a></li>
-        <li><a href="/admin/salary/index">Salaries</a></li>
+        <li><a href="<?= Url::to(['/admin']) ?>">Dashboard</a></li>
+        <li><a href="<?= Url::to(['/admin/salary/index']) ?>">Salaries</a></li>
         <li class="active"><?= $this->title; ?></li>
     </ol>
 </div>

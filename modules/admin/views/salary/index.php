@@ -1,13 +1,14 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\LinkPager;
 
 $this->title = 'Salaries';
 ?>
 <div class="breadcrumbs">
     <ol class="breadcrumb">
-        <li><a href="/admin">Dashboard</a></li>
+        <li><a href="<?= Url::to(['/admin']) ?>">Dashboard</a></li>
         <li class="active"><?= $this->title; ?></li>
     </ol>
 </div>
@@ -20,7 +21,7 @@ $this->title = 'Salaries';
     </p>
 
 
-    <p>Items: <?= count($salaries); ?></p>
+    <p>Count: <?= count($salaries); ?></p>
 
     <table class="table-bordered table-striped table">
         <tr>
@@ -32,10 +33,10 @@ $this->title = 'Salaries';
         </tr>
 		<?php foreach ($salaries as $salary): ?>
             <tr>
-                <td><?php echo $salary->id; ?></td>
-                <td><?php echo $salary->created_at; ?></td>
-                <td><?php echo $salary->salary; ?></td>
-                <td><?php echo $salary->employees['first_name'].' '.$salary->employees['last_name']; ?></td>
+                <td><?= $salary->id; ?></td>
+                <td><?= $salary->created_at; ?></td>
+                <td><?= $salary->salary; ?></td>
+                <td><?= $salary->employees['first_name'].' '.$salary->employees['last_name']; ?></td>
                 <td> <?= Html::a('<i class="fa fa-eye">', ['view', 'id' => $salary['id']]) ?></td>
                 <td> <?= Html::a('<i class="fa fa-pencil-square-o">', ['update', 'id' => $salary['id']]) ?></td>
                 <td> <?= Html::a('History', ['history', 'id' => $salary->employees['id']],
@@ -45,7 +46,7 @@ $this->title = 'Salaries';
 		<?php endforeach; ?>
     </table>
 	
-	<?php echo LinkPager::widget([
+	<?= LinkPager::widget([
 		'pagination' => $pagination,
 	]); ?>
 

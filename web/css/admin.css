@@ -497,6 +497,10 @@ a:hover, a:focus {
     background-color: rgba(231, 76, 60, 0.8);
 }
 
+.companies_block:hover {
+    background-color: rgba(168, 0, 15, 0.8);
+}
+
 .ssb-icon {
     color: #fff;
     display: inline-block;
@@ -517,7 +521,12 @@ table tr th, table tr td, label, li, p{
     font-size: 15px !important;
 }
 
-.employee_image, .skill_image {
+.employee_image {
     width: 100px;
     height: 100px;
+}
+
+.skill_image {
+    width: 50px;
+    height: 50px;
 }

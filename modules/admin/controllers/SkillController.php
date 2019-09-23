@@ -5,9 +5,7 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\modules\admin\models\Skill;
 use yii\web\UploadedFile;
-use yii\filters\VerbFilter;
 use yii\data\Pagination;
-use yii\web\NotFoundHttpException;
 
 /**
  * SkillController implements the CRUD actions for Skill model.
@@ -32,7 +30,7 @@ class SkillController extends AppAdminController
 	
 	public function actionView($id)
 	{
-		$skill = $this->findModel($id);
+		$skill = Skill::findOne($id);
 		
 		return $this->render('view', compact('skill'));
 	}
@@ -44,9 +42,7 @@ class SkillController extends AppAdminController
 	    if ($skill->load(Yii::$app->request->post())) {
             $skill->image = UploadedFile::getInstance($skill, 'image');
             if (!is_null($skill->image)) {
-                if ($skill->validate()) {
-                    $skill->image->saveAs('uploads/skills/' . $skill->image->baseName . '.' . $skill->image->extension);
-                }
+	            $skill->image->saveAs('uploads/skills/' . $skill->image->baseName . '.' . $skill->image->extension);
             }
 
             if ($skill->save()) {
@@ -59,23 +55,20 @@ class SkillController extends AppAdminController
 	
     public function actionUpdate($id)
     {
-        $skill = $this->findModel($id);
+        $skill = Skill::findOne($id);
+        $image = $skill->image;
 
         if ($skill->load(Yii::$app->request->post())) {
             $skill->image = UploadedFile::getInstance($skill, 'image');
-            $image = Skill::find()->select('image')
-                                  ->where(['id' => $id])
-                                  ->asArray()
-                                  ->one()['image'];
 
             if ($image) {
-                unlink('uploads/skills/' . $image);
+                if (file_exists('uploads/skills/'.$image)) {
+                    unlink('uploads/skills/' . $image);
+                }
             }
 
             if (!is_null($skill->image)) {
-                if ($skill->validate()) {
-                    $skill->image->saveAs('uploads/skills/' . $skill->image->baseName . '.' . $skill->image->extension);
-                }
+	            $skill->image->saveAs('uploads/skills/' . $skill->image->baseName . '.' . $skill->image->extension);
             }
 
             if ($skill->save()) {
@@ -88,17 +81,16 @@ class SkillController extends AppAdminController
 	
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $skill = Skill::findOne($id);
+        $image = $skill->image;
+        $skill->delete();
+	
+	    if ($image) {
+	        if (file_exists('uploads/skills/' . $image)) {
+                unlink('uploads/skills/' . $image);
+            }
+	    }
 
         return $this->redirect(['index']);
     }
-	
-	protected function findModel($id)
-	{
-		if (($model = Skill::findOne($id)) !== null) {
-			return $model;
-		}
-		
-		throw new NotFoundHttpException('The requested page does not exist.');
-	}
 }
