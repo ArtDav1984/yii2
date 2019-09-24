@@ -108,4 +108,9 @@ class SiteController extends Controller
     	
         return $this->render('about', compact('skills', 'pagination'));
     }
+
+    public function actionEmployee()
+    {
+        return $this->render('employee');
+    }
 }

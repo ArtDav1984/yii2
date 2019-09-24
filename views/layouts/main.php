@@ -46,7 +46,7 @@
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation"><a href="<?= Url::to(['/']) ?>" class="active">Home</a></li>
 							<li role="presentation"><a href="<?= Url::to(['/site/about']) ?>">About Us</a></li>
-							<li role="presentation"><a href="<?= Url::to(['/employee/index']) ?>">Team</a></li>
+							<li role="presentation"><a href="<?= Url::to(['/site/employee']) ?>">Team</a></li>
 							<li role="presentation"><a href="<?= Url::to(['/site/contact']) ?>">Contact</a></li>
 						</ul>
 					</div>

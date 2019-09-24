@@ -9,6 +9,6 @@
 	{
 		public function actionIndex()
 		{
-			return $this->render('index');
+			return $this->render('view');
 		}
 	}
