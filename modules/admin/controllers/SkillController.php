@@ -41,11 +41,10 @@ class SkillController extends AppAdminController
 	
 	    if ($skill->load(Yii::$app->request->post())) {
             $skill->image = UploadedFile::getInstance($skill, 'image');
-            if (!is_null($skill->image)) {
-	            $skill->image->saveAs('uploads/skills/' . $skill->image->baseName . '.' . $skill->image->extension);
-            }
 
             if ($skill->save()) {
+	            $skill->image->saveAs('uploads/skills/' . $skill->image->baseName . '.' . $skill->image->extension);
+	            
                 return $this->redirect(['view', 'id' => $skill->id]);
             }
 	    }
@@ -61,17 +60,13 @@ class SkillController extends AppAdminController
         if ($skill->load(Yii::$app->request->post())) {
             $skill->image = UploadedFile::getInstance($skill, 'image');
 
-            if ($image) {
-                if (file_exists('uploads/skills/'.$image)) {
-                    unlink('uploads/skills/' . $image);
-                }
-            }
-
-            if (!is_null($skill->image)) {
-	            $skill->image->saveAs('uploads/skills/' . $skill->image->baseName . '.' . $skill->image->extension);
-            }
-
             if ($skill->save()) {
+	            $skill->image->saveAs('uploads/skills/' . $skill->image->baseName . '.' . $skill->image->extension);
+	
+	            if (file_exists('uploads/skills/' . $image)){
+		            unlink('uploads/skills/' . $image);
+	            }
+	            
                 return $this->redirect(['view', 'id' => $skill->id]);
             }
         }
@@ -82,14 +77,12 @@ class SkillController extends AppAdminController
     public function actionDelete($id)
     {
         $skill = Skill::findOne($id);
-        $image = $skill->image;
-        $skill->delete();
 	
-	    if ($image) {
-	        if (file_exists('uploads/skills/' . $image)) {
-                unlink('uploads/skills/' . $image);
-            }
+	    if (file_exists('uploads/skills/' . $skill->image)) {
+		    unlink('uploads/skills/' . $skill->image);
 	    }
+	
+	    $skill->delete();
 
         return $this->redirect(['index']);
     }

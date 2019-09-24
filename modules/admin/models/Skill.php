@@ -29,7 +29,7 @@ class Skill extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['name', 'image'], 'required'],
             [['name'], 'string', 'min' => 2, 'max' => 30],
             [['image'], 'file'],
         ];

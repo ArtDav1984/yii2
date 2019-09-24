@@ -30,7 +30,7 @@ class m190916_112346_create_employees_table extends Migration
             'address' => $this->string()->notNull(),
             'phone_number' => $this->integer()->notNull(),
             'email' => $this->string()->notNull(),
-            'image' => $this->string()->null(),
+            'image' => $this->string()->notNull()
         ]);
 
         // creates index for column `companies_id`

@@ -21,7 +21,7 @@ class m190922_213447_create_users_table extends Migration
 
         $this->insert('{{%users}}', [
             'username' => 'artdav',
-            'password' => '$2y$13$eJMcxXLWDI.g7yH5T3J5Wule7UxgsL/3tje0rO6LRDgTKacYYRRzK' // 'artdav1984';
+            'password' => '$2y$13$eJMcxXLWDI.g7yH5T3J5Wule7UxgsL/3tje0rO6LRDgTKacYYRRzK'
         ]);
     }
 

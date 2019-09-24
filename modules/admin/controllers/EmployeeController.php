@@ -57,13 +57,18 @@ class EmployeeController extends AppAdminController
 			$birthday = Yii::$app->request->post('Employee')['birthday'];
 			$employee->age = $this->calculateAge($birthday);
 			$employee->birthday = date_format(date_create("$birthday"), "Y-m-d");
+			$image = UploadedFile::getInstance($employee, 'image');
+			$defaultImage = 'avatar.png';
 
-            $employee->image = UploadedFile::getInstance($employee, 'image');
-            if (!is_null($employee->image)) {
-	            $employee->image->saveAs('uploads/employees/' . $employee->image->baseName . '.' . $employee->image->extension);
-            }
+            $employee->image = $image ? $image : $defaultImage;
 
 			if ($employee->save()) {
+				
+				if ($image) {
+					$employee->image->saveAs('uploads/employees/' .
+					                         $employee->image->baseName . '.' . $employee->image->extension);
+				}
+    
 				if (Yii::$app->request->post('skills_id')) {
 					$skills_ids = Yii::$app->request->post("skills_id");
 
@@ -88,7 +93,7 @@ class EmployeeController extends AppAdminController
 	{
 		$employee = Employee::find()->with('companies', 'departments')->where(['id' => $id])->one();
 		$employeesSkill = EmployeesSkill::find()->where(['employees_id' => $id])->all();
-		$image = $employee->image;
+		$currentImage = $employee->image;
 
 		$companies = Company::find()->asArray()->all();
 		$departments = Department::find()->asArray()->all();
@@ -102,19 +107,24 @@ class EmployeeController extends AppAdminController
 			$birthday = Yii::$app->request->post('Employee')['birthday'];
 			$employee->age = $this->calculateAge($birthday);
 			$employee->birthday = date_format(date_create("$birthday"), "Y-m-d");
-
-            $employee->image = UploadedFile::getInstance($employee, 'image');
-
-            if ($image) {
-                if (file_exists('uploads/employees/' . $image)) {
-                    unlink('uploads/employees/' . $image);
-                }
-            }
-            if (!is_null($employee->image)) {
-	            $employee->image->saveAs('uploads/employees/' . $employee->image->baseName . '.' . $employee->image->extension);
-            }
+			$image = UploadedFile::getInstance($employee, 'image');
+			$defaultImage = 'avatar.png';
+			
+			$employee->image = $image ? $image : $defaultImage;
 			
 			if ($employee->save()) {
+				
+				if ($image) {
+					$employee->image->saveAs('uploads/employees/' .
+					                         $employee->image->baseName . '.' . $employee->image->extension);
+				}
+				
+				if ($currentImage !== $defaultImage) {
+					if (file_exists('uploads/employees/' . $currentImage)) {
+						unlink('uploads/employees/' . $currentImage);
+					}
+				}
+            	
                 if (Yii::$app->request->post('skills_id')) {
                     $skills_ids = Yii::$app->request->post("skills_id");
 				
@@ -150,13 +160,14 @@ class EmployeeController extends AppAdminController
 	public function actionDelete($id)
 	{
 		$employee = Employee::findOne($id);
-		$image = $employee->image;
-		$employee->delete();
+		$defaultImage = 'avatar.png';
 		
-		if ($image) {
-		    if (file_exists('uploads/employees/' . $image)) {
-                unlink('uploads/employees/' . $image);
-            }
+		if ($employee->delete()) {
+			if ($employee->image !== $defaultImage) {
+				if (file_exists('uploads/employees/' . $employee->image)) {
+					unlink('uploads/employees/' . $employee->image);
+				}
+			}
 		}
 		
 		return $this->redirect(['index']);
