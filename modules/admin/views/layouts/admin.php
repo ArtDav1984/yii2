@@ -72,6 +72,11 @@
                             <span>Salaries</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="<?= Url::to(['/admin/news/index']) ?>">
+                            <span>News</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <!-- sidebar-menu  -->

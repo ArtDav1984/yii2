@@ -10,6 +10,8 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\modules\admin\models\Skill;
+use app\modules\admin\models\Employee;
+use app\modules\admin\models\News;
 use yii\data\Pagination;
 
 class SiteController extends Controller
@@ -52,7 +54,18 @@ class SiteController extends Controller
 	
     public function actionIndex()
     {
-        return $this->render('index');
+	    $query = News::find();
+	
+	    $count = $query->count();
+	
+	    $pagination = new Pagination(['totalCount' => $count]);
+	    $pagination->defaultPageSize = 3;
+	
+	    $news = $query->offset($pagination->offset)
+	                  ->limit($pagination->limit)
+	                  ->all();
+	
+	    return $this->render('index', compact('news', 'pagination'));
     }
 
     public function actionLogin()
@@ -82,7 +95,7 @@ class SiteController extends Controller
     public function actionContact()
     {
         $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+        if ($model->load(Yii::$app->request->post()) && $model->contact('artur.davoyan1984@gmail.com')) {
             Yii::$app->session->setFlash('contactFormSubmitted');
 
             return $this->refresh();
@@ -108,9 +121,20 @@ class SiteController extends Controller
     	
         return $this->render('about', compact('skills', 'pagination'));
     }
-
-    public function actionEmployee()
-    {
-        return $this->render('employee');
-    }
+	
+	public function actionEmployee()
+	{
+		$query = Employee::find()->with('companies', 'departments','employeesSkills.skills');
+		
+		$count = $query->count();
+		
+		$pagination = new Pagination(['totalCount' => $count]);
+		$pagination->defaultPageSize = 6;
+		
+		$employees = $query->offset($pagination->offset)
+		                   ->limit($pagination->limit)
+		                   ->all();
+		
+		return $this->render('employee', compact('employees', 'pagination'));
+	}
 }

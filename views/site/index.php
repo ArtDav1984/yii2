@@ -2,6 +2,7 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\widgets\LinkPager;
 
 $this->title = 'Home';
 ?>
@@ -52,13 +53,13 @@ $this->title = 'Home';
 
         <div class="col-md-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
             <h2>Lates News</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus interdum erat libero, pulvinar tincidunt leo consectetur eget. Curabitur lacinia pellentesque libero, pulvinar tincidunt leo consectetur eget. Curabitur lacinia pellentesque libero,
-                pulvinar tincidunt leo consectetur eget. Curabitur lacinia pellentesque
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus interdum erat libero, pulvinar tincidunt leo consectetur eget. Curabitur lacinia pellentesque libero, pulvinar tincidunt leo consectetur eget. Curabitur lacinia pellentesque
-                libero, pulvinar tincidunt leo consectetur eget. Curabitur lacinia pellentesque
-            </p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus interdum erat libero, pulvinar tincidunt leo consectetur eget. Curabitur lacinia pellentesque libero, pulvinar tincidunt leo consectetur eget. Curabitur lacinia pellentesque
-                libero, pulvinar tincidunt leo consectetur eget. Curabitur lacinia pellentesque </p>
+            <?php foreach ($news as $item) : ?>
+                <h4><?= $item->title ?></h4>
+                <p><?= $item->body ?></p>
+            <?php endforeach; ?>
+	        <?= LinkPager::widget([
+		        'pagination' => $pagination,
+	        ]); ?>
         </div>
     </div>
 </div>

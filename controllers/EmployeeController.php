@@ -4,11 +4,16 @@
 	namespace app\controllers;
 	
 	use yii\web\Controller;
+	use app\modules\admin\models\Employee;
 	
 	class EmployeeController extends Controller
 	{
-		public function actionIndex()
+		public function actionView($id)
 		{
-			return $this->render('view');
+			$employee = Employee::find()->with('companies', 'departments', 'salaries', 'employeesSkills.skills')
+			                            ->where(['id' => $id])
+			                            ->one();
+			
+			return $this->render('view', compact('employee'));
 		}
 	}

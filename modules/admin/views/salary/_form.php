@@ -23,7 +23,7 @@ use yii\jui\DatePicker;
 			         'changeMonth' => true,
 			         'changeYear' => true,
 			         'dateFormat' => 'yyyy/MM/dd',
-			         'yearRange' => '2019:2050',
+			         'yearRange' => '2010:2050',
 		         ]
 	         ])->textInput(['class' => 'form-control', 'readonly' => true, 'value' => $created_at]) ?>
 
