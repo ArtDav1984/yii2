@@ -13,7 +13,10 @@ $config = [
 		    'class' => 'app\modules\admin\Module',
 		    'layout' => 'admin',
 		    'defaultRoute' => 'site/index'
-	    ]
+	    ],
+        'api' => [
+            'class' => 'app\modules\api\Module',
+        ],
     ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',

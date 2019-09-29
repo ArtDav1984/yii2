@@ -15,6 +15,7 @@ use yii\web\UploadedFile;
  */
 class Skill extends \yii\db\ActiveRecord
 {
+    const SCENARIO_CREATE = 'create';
     /**
      * {@inheritdoc}
      */
@@ -33,6 +34,13 @@ class Skill extends \yii\db\ActiveRecord
             [['name'], 'string', 'min' => 2, 'max' => 30],
             [['image'], 'file'],
         ];
+    }
+
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios['create'] = ['name', 'image'];
+        return $scenarios;
     }
 
     /**
