@@ -33,9 +33,9 @@ class SkillController extends Controller
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-        $skill = Skill::find()->where(['id' => $id])->asArray()->one();
+        $skill = $skill = Skill::findOne($id);
 
-        if (count($skill) > 0) {
+        if ($skill !== null) {
             return array('status' => true, 'data' => $skill);
         } else {
             return array('status' => false, 'data' => 'skill not found');
@@ -62,7 +62,6 @@ class SkillController extends Controller
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
         $skill = Skill::findOne($id);
-        $skill->scenario = Skill::SCENARIO_CREATE;
         $skill->attributes = \yii::$app->request->post();
         if ($skill->validate()) {
             $skill->save();
@@ -76,9 +75,9 @@ class SkillController extends Controller
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-        $skill = Skill::find()->where(['id' => $id])->asArray()->one();
+        $skill = Skill::findOne($id);
 
-        if (count($skill) > 0) {
+        if ($skill !== null) {
             $skill->delete();
             return array('status' => true, 'data' => 'Skill record is successfully deleted');
         } else {
