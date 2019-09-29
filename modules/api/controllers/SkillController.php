@@ -47,7 +47,7 @@ class SkillController extends Controller
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
         $skill = new Skill();
-        $skill->scenario = Skill::SCENARIO_CREATE;
+        //$skill->scenario = Skill::SCENARIO_CREATE;
         $skill->attributes = \yii::$app->request->post();
         if ($skill->validate()) {
             $skill->save();
