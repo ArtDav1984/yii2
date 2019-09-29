@@ -11,10 +11,27 @@ namespace app\modules\api\controllers;
 use yii;
 use yii\web\Controller;
 use app\modules\admin\models\Skill;
+use yii\filters\VerbFilter;
 
 class SkillController extends Controller
 {
     public $enableCsrfValidation = false;
+
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'index' => ['get'],
+                    'view' => ['get'],
+                    'create' => ['post'],
+                    'update' => ['post'],
+                    'delete' => ['get']
+                ],
+            ],
+        ];
+    }
 
     public function actionIndex()
     {
