@@ -53,7 +53,150 @@
             <h2 class="ssb-title">Monthly salary</h2>
         </div>
     </div>
+
+    <table id="myTable" class="tablesorter">
+        <thead>
+        <tr>
+            <th>Account #</th>
+            <th>Difference</th>
+            <th>3: Ratings (max)</th>
+            <th>4: Ratings (min)</th>
+            <th class="string-max">5: Change (max)</th>
+            <th class="string-min">6: Change (min)</th>
+            <th class="string-top">7: Change (top)</th>
+            <th class="string-bottom">8: Change (bottom)</th>
+            <th class="string-none">9: Change (zero)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>A43</td>
+            <td>-35</td>
+            <td>01</td>
+            <td>01</td>
+            <td>-.1</td>
+            <td>-.1</td>
+            <td>-.1</td>
+            <td>-.1</td>
+            <td>-.1</td>
+        </tr>
+        <tr>
+            <td>A255</td>
+            <td>33</td>
+            <td>02</td>
+            <td>02</td>
+            <td>N/A #1</td>
+            <td>N/A #1</td>
+            <td>N/A #1</td>
+            <td>N/A #1</td>
+            <td>N/A #1</td>
+        </tr>
+        <tr>
+            <td>A33</td>
+            <td>2</td>
+            <td>03</td>
+            <td>03</td>
+            <td>N/A #2</td>
+            <td>N/A #2</td>
+            <td>N/A #2</td>
+            <td>N/A #2</td>
+            <td>N/A #2</td>
+        </tr>
+        <tr>
+            <td>A1</td>
+            <td>-5</td>
+            <td>04</td>
+            <td>04</td>
+            <td>-8.4</td>
+            <td>-8.4</td>
+            <td>-8.4</td>
+            <td>-8.4</td>
+            <td>-8.4</td>
+        </tr>
+        <tr>
+            <td>A102</td>
+            <td>99</td>
+            <td>05</td>
+            <td>05</td>
+            <td>-2.2</td>
+            <td>-2.2</td>
+            <td>-2.2</td>
+            <td>-2.2</td>
+            <td>-2.2</td>
+        </tr>
+        <tr>
+            <td>A10</td>
+            <td>-1</td>
+            <td>06</td>
+            <td>06</td>
+            <td>97.4</td>
+            <td>97.4</td>
+            <td>97.4</td>
+            <td>97.4</td>
+            <td>97.4</td>
+        </tr>
+        <tr>
+            <td>A02</td>
+            <td>0</td>
+            <td>07</td>
+            <td>07</td>
+            <td>23.6</td>
+            <td>23.6</td>
+            <td>23.6</td>
+            <td>23.6</td>
+            <td>23.6</td>
+        </tr>
+        <tr>
+            <td>A55</td>
+            <td>44</td>
+            <td></td>
+            <td></td>
+            <td>11.4</td>
+            <td>11.4</td>
+            <td>11.4</td>
+            <td>11.4</td>
+            <td>11.4</td>
+        </tr>
+        <tr>
+            <td>A87</td>
+            <td>04</td>
+            <td>NR</td>
+            <td>NR</td>
+            <td>5.2</td>
+            <td>5.2</td>
+            <td>5.2</td>
+            <td>5.2</td>
+            <td>5.2</td>
+        </tr>
+        <tr>
+            <td>A012</td>
+            <td></td>
+            <td>NR</td>
+            <td>NR</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
+
+<script type="text/javascript" src="/path/to/jquery-latest.js"></script>
+<script type="text/javascript" src="/path/to/jquery.tablesorter.js"></script>
+
+<!-- tablesorter widgets (optional) -->
+<script type="text/javascript" src="/path/to/jquery.tablesorter.widgets.js"></script>
+
+<?php
+$script = <<< JS
+$ ( function () {   
+    $ ( "#myTable" ).tablesorter (); 
+}); 
+JS;
+$this->registerJs($script);
+?>
 
 
 

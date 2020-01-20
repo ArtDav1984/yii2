@@ -77,6 +77,11 @@
                             <span>News</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="<?= Url::to(['/admin/stripe/index']) ?>">
+                            <span>Stripe</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <!-- sidebar-menu  -->

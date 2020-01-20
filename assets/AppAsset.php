@@ -24,7 +24,7 @@ class AppAsset extends AssetBundle
 		'css/font-awesome.min.css',
 		'css/animate.css',
 		'css/prettyPhoto.css',
-		'css/style.css'
+		'css/stripe.css'
 	];
 	public $js = [
 		'js/jquery.min.js',

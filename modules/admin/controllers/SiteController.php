@@ -14,6 +14,7 @@
 	use app\modules\admin\models\Employee;
 	use app\modules\admin\models\Skill;
 	use app\modules\admin\models\Salary;
+	use app\modules\admin\models\Partner;
 	use yii\data\Pagination;
 	
 	
@@ -27,6 +28,7 @@
 			$employeesCount = Employee::find()->count();
 			$skillsCount = Skill::find()->count();
 			$monthlySalary = Salary::find()->sum('salary');
+
 			return $this->render('index',
 				compact('companies', 'monthlySalary', 'departmentsCount', 'employeesCount', 'skillsCount'));
 		}
@@ -78,4 +80,16 @@
 			
 			return $this->render('view', compact('employees', 'pagination'));
 		}
+
+        protected function generatePassword($length) {
+            $chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            $count = mb_strlen($chars);
+
+            for ($i = 0, $result = ''; $i < $length; $i++) {
+                $index = rand(0, $count - 1);
+                $result .= mb_substr($chars, $index, 1);
+            }
+
+            return $result;
+        }
 	}
